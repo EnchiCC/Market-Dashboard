@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docks on Amazon — Dock 品類 Amazon 通路市場與競品</title>
+<style>
+:root{
+  --graphite:#101418; --slate:#1F2A32; --paper:#F6F7F5; --rule:#D8DDDC;
+  --muted:#5E6B72; --oxide:#C8532B; --green:#1A6E4E; --red:#A03C2A;
+  --h0:#EDF1F1; --h1:#CBDEDF; --h2:#9CC6C9; --h3:#63A6AC; --h4:#2E808A; --h5:#0E5560;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --cjk:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Heiti TC",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--slate);
+  font:400 15px/1.5 var(--sans);font-variant-numeric:tabular-nums}
+.wrap{max-width:1260px;margin:0 auto;padding:0 28px}
+
+.zh{font-family:var(--cjk);margin-left:.4em}
+.en.b,.zh.b{display:block}
+.zh.b{margin-left:0}
+body.lang-en .zh{display:none}
+body.lang-zh .en{display:none}
+body.lang-en .zh,body.lang-zh .en{margin-left:0}
+h2 .zh.b,h3 .zh.b{font:500 14.5px/1.4 var(--cjk);color:var(--muted);margin-top:2px}
+.lede .zh.b,.sub .zh.b{font-family:var(--cjk);margin-top:5px;line-height:1.65}
+
+.mast{background:var(--graphite);color:#E9EDEC;padding:24px 0 20px}
+.mast .wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+h1{font:500 26px/1.15 var(--serif);margin:0}
+h1 .zh.b{font:500 19px/1.3 var(--cjk);color:#B6C4C5;margin-top:5px}
+.mast p{margin:9px 0 0;color:#8E9C9F;font-size:13px}
+.seg{display:flex;border:1px solid #33403F;border-radius:3px;overflow:hidden}
+.seg button{background:none;border:0;color:#8E9C9F;font:inherit;font-size:12.5px;
+  padding:7px 13px;cursor:pointer;white-space:nowrap}
+.seg button+button{border-left:1px solid #33403F}
+.seg button[aria-pressed="true"]{background:#E9EDEC;color:var(--graphite);font-weight:600}
+.seg button:focus-visible{outline:2px solid var(--oxide);outline-offset:-2px}
+
+.band{border-bottom:1px solid var(--rule);background:#fff}
+.band .wrap{display:flex;flex-wrap:wrap}
+.stat{padding:18px 28px 18px 0;margin-right:28px;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:0;margin-right:0}
+.stat b{display:block;font:500 27px/1 var(--serif);letter-spacing:-.015em}
+.stat .lab{display:block;font-size:12.3px;color:var(--muted);margin-top:8px}
+.stat .lab .zh.b{margin-top:2px}
+.stat.flag b{color:var(--oxide)}
+.up{color:var(--green)}.dn{color:var(--red)}
+
+section{padding:28px 0 6px}
+h2{font:500 19px/1.2 var(--serif);margin:0 0 4px}
+.lede{margin:0 0 16px;color:var(--muted);font-size:13.5px;max-width:76ch}
+
+.strip{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
+.mk{background:#fff;border:1px solid var(--rule);border-radius:3px;padding:11px 12px 12px;
+  text-align:left;font:inherit;cursor:pointer;color:inherit;
+  display:flex;flex-direction:column;min-height:132px;height:100%}
+.mk:hover{border-color:#9AA6A5}
+.mk:focus-visible{outline:2px solid var(--oxide);outline-offset:1px}
+.mk[aria-pressed="true"]{border-color:var(--graphite);box-shadow:inset 0 0 0 1px var(--graphite)}
+.mk .cc{display:block;font-weight:650;font-size:12.5px;line-height:1.3}
+.mk .cc i{font-style:normal;color:var(--muted);font-weight:500;padding-right:5px}
+.mk .cc .zh{margin-left:0;display:block;font-weight:600}
+body.lang-en .mk .cc .zh{display:none}
+.mk .v{display:block;font:500 15px/1 var(--serif);margin-top:6px}
+.mk .yy{display:block;font-size:11.5px;margin-top:5px;line-height:1.35}
+.mk .mix{display:flex;height:5px;margin-top:auto;border-radius:2px;overflow:hidden;background:#EAEEED}
+.mk .mix i{display:block;height:100%}
+.mk .mixlab{display:block;font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.35}
+
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 12px}
+.tools input{font:inherit;font-size:13.5px;padding:7px 11px;border:1px solid var(--rule);
+  border-radius:3px;background:#fff;min-width:230px}
+.tools .hint{font-size:12.5px;color:var(--muted)}
+.tools .clear{font:inherit;font-size:12.5px;background:none;border:0;color:var(--oxide);
+  cursor:pointer;text-decoration:underline}
+.mxwrap{background:#fff;border:1px solid var(--rule);border-radius:3px;overflow:auto;max-height:620px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
+thead th{position:sticky;top:0;z-index:3;background:#fff;border-bottom:1.5px solid var(--slate);
+  padding:8px;font-weight:600;font-size:12.5px;white-space:nowrap;cursor:pointer;
+  text-align:right;vertical-align:bottom}
+thead th .zh.b{font:600 11.5px/1.3 var(--cjk);color:var(--muted);margin-top:1px}
+thead th .hd{display:inline-block;vertical-align:bottom}
+thead th:first-child{text-align:left;left:0;z-index:4}
+thead th:hover{background:#F1F4F3}
+thead th .ind{color:var(--muted);font-weight:400}
+tbody td{padding:0;border-bottom:1px solid #EEF1F0;text-align:right}
+tbody th{position:sticky;left:0;background:#fff;z-index:2;text-align:left;font-weight:500;
+  padding:0 10px 0 12px;border-bottom:1px solid #EEF1F0;border-right:1px solid var(--rule);white-space:nowrap}
+tbody tr:hover th,tbody tr:hover td{background:#FAFBFA}
+tbody tr.dim{opacity:.34}
+tbody tr.me th{box-shadow:inset 3px 0 0 var(--oxide);font-weight:700}
+.cell{display:block;padding:7px 8px}
+.cell.n{color:var(--oxide);opacity:.5}
+.cell.d{color:#fff}
+.num{padding:7px 10px;display:block}
+.num.mut{color:var(--muted)}
+tfoot td,tfoot th{padding:9px 8px;font-weight:600;border-top:1.5px solid var(--slate);
+  background:#fff;position:sticky;bottom:0}
+tfoot th{left:0;z-index:2;text-align:left;padding-left:12px;white-space:nowrap}
+.legend{display:flex;align-items:center;gap:7px;margin:11px 0 0;font-size:12px;
+  color:var(--muted);flex-wrap:wrap}
+.legend i{width:26px;height:11px;display:inline-block;border:1px solid rgba(0,0,0,.06)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.panel{background:#fff;border:1px solid var(--rule);border-radius:3px;padding:20px 22px 22px}
+.panel h3{font:600 14px/1.35 var(--sans);margin:0 0 4px}
+.panel h3 .zh.b{font:600 13.5px/1.4 var(--cjk);color:var(--muted)}
+.panel .sub{font-size:12.5px;color:var(--muted);margin:0 0 15px}
+
+.pb{display:grid;grid-template-columns:76px 1fr 66px 56px;align-items:center;gap:0 9px;
+  padding:6px 0;border-bottom:1px solid #F0F3F2;font-size:12.5px}
+.pb:last-of-type{border-bottom:0}
+.pb .lab{font-weight:600}
+.pb .tr{height:14px;background:#EFF2F1;border-radius:2px;overflow:hidden}
+.pb .tr i{display:block;height:100%;background:var(--h4)}
+.pb .tr i.hi{background:var(--oxide)}
+.pb .v{text-align:right;color:var(--muted);font-size:11.5px}
+.pb.hd{border-bottom:1px solid var(--rule);color:var(--muted);font-size:11px;font-weight:700}
+
+.cl{display:grid;grid-template-columns:1fr 78px 52px;align-items:center;gap:0 8px;
+  padding:5px 0;border-bottom:1px solid #F0F3F2;font-size:12.5px}
+.cl:last-child{border-bottom:0}
+.cl .nm{font-weight:600}
+.cl .v{text-align:right;color:var(--muted);font-size:11.5px}
+.cl .p{text-align:right;font-weight:700}
+
+.asus{background:var(--graphite);color:#E9EDEC;border-radius:3px;padding:24px 26px 22px;margin-top:6px}
+.asus h2{color:#fff;margin-bottom:4px}
+.asus h2 .zh.b{color:#9FB0B2}
+.asus .lede{color:#96A6A8;max-width:82ch;margin-bottom:20px}
+.atab{width:100%;font-size:12.5px;border-collapse:collapse}
+.atab th,.atab td{padding:7px 9px;text-align:right;border-bottom:1px solid #263036}
+.atab th{color:#8E9C9F;font-weight:600;font-size:11.5px;text-align:right;
+  border-bottom:1px solid #3A474E;white-space:nowrap}
+.atab th:first-child,.atab td:first-child{text-align:left}
+.atab td.g{color:var(--oxide);font-weight:700}
+.atab tr.best td{color:#fff}
+.atwo{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:24px}
+.asub{font:600 12px/1.4 var(--sans);color:#fff;margin:0 0 4px}
+.asub .zh{color:#9FB0B2}
+.anote{font-size:12px;color:#8E9C9F;margin:0 0 12px;line-height:1.6}
+.anote .zh.b{margin-top:5px;line-height:1.75}
+.dead{font-size:12px;color:#B6C4C5}
+.dead div{display:grid;grid-template-columns:26px 1fr 70px 52px;gap:0 8px;
+  padding:5px 0;border-bottom:1px solid #263036}
+.dead .t{color:#8E9C9F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dead .z{color:var(--oxide);text-align:right;font-weight:700}
+.dead .y{text-align:right}
+.roll div{display:grid;grid-template-columns:26px 1fr 46px 62px;gap:0 8px;
+  padding:5px 0;border-bottom:1px solid #263036;font-size:12px;color:#B6C4C5;align-items:center}
+.roll .tr{height:10px;background:#263036;border-radius:2px;position:relative}
+.roll .tr i{position:absolute;height:100%;background:var(--h3);border-radius:2px}
+.roll .n{text-align:right;color:#8E9C9F}
+.roll .s{text-align:right}
+.roll .none i{background:var(--oxide);opacity:.5}
+
+.flags{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.flag-item{background:#fff;border:1px solid var(--rule);border-radius:3px;padding:15px 18px}
+.flag-item h4{margin:0 0 6px;font-size:13.5px;font-weight:650;line-height:1.4}
+.flag-item h4 .zh.b{font-family:var(--cjk);font-size:13px}
+.flag-item p{margin:0;font-size:12.8px;color:var(--muted);line-height:1.55}
+.flag-item p .zh.b{margin-top:6px;line-height:1.7}
+.flag-item.sev h4{color:var(--oxide)}
+
+footer{border-top:1px solid var(--rule);margin-top:32px;padding:20px 0 40px;
+  font-size:12.3px;color:var(--muted)}
+footer p{margin:0 0 9px;max-width:96ch}
+footer .zh.b{margin-top:4px;line-height:1.75}
+
+@media (max-width:980px){
+  .strip{grid-template-columns:repeat(4,1fr)}
+  .two,.atwo,.flags{grid-template-columns:1fr}
+  .stat{padding-right:20px;margin-right:20px}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:21px}
+}
+@media print{ body{background:#fff} .mxwrap{max-height:none;overflow:visible} .tools,.seg{display:none} }
+</style>
+</head>
+<body class="lang-both">
+
+<div class="mast"><div class="wrap">
+  <div>
+    <h1><span class="en b">Docks on Amazon</span><span class="zh b">Dock ── Amazon 通路市場與競品</span></h1>
+    <p id="masttag"></p>
+  </div>
+  <div class="seg" role="group" aria-label="Language 語言">
+    <button id="lb" aria-pressed="true">EN<span class="zh">中</span></button>
+    <button id="le" aria-pressed="false">EN</button>
+    <button id="lz" aria-pressed="false">中文</button>
+  </div>
+</div></div>
+
+<div class="band"><div class="wrap" id="band"></div></div>
+
+<div class="wrap">
+
+<section>
+  <h2 id="striph"></h2>
+  <p class="lede">
+    <span class="en b">Docking-station revenue only, converted to US dollars. The bar under each market shows
+    how that market splits between docking stations and USB hubs — the two sit in the same category node but
+    are different businesses. Select a market to focus the table below.</span>
+    <span class="zh b">僅計 docking station 營收，已換算為美元。各市場下方的長條顯示該市場在 docking station 與 USB hub 之間的比例——兩者屬於同一個品類節點，但其實是兩門不同的生意。點選市場可聚焦下方表格。</span>
+  </p>
+  <div class="strip" id="strip"></div>
+</section>
+
+<section>
+  <h2><span class="en b">Who sells docks, where</span><span class="zh b">誰在賣 dock、賣在哪裡</span></h2>
+  <p class="lede">
+    <span class="en b">Top 60 brands by dock revenue across the eight markets, plus ASUS. Colour is share of
+    that market's docking-station revenue. A dash means the brand sold no docks there in this window. Unlike
+    the earlier top-twenty exports, this is complete coverage — every ASIN is counted.</span>
+    <span class="zh b">依八個市場 dock 營收排序的前 60 大品牌，另加入 ASUS。色階為該市場 docking station 營收佔比。破折號代表該品牌在此區間於該市場沒有 dock 銷售。與先前的前二十名出口檔不同，這份是完整覆蓋——所有 ASIN 都已計入。</span>
+  </p>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Filter brands 篩選品牌" aria-label="Filter brands 篩選品牌">
+    <span class="hint" id="qhint"></span>
+    <button class="clear" id="reset" hidden><span class="en">Clear selection</span><span class="zh">清除選取</span></button>
+  </div>
+  <div class="mxwrap"><table id="mx">
+    <thead><tr id="mxh"></tr></thead><tbody id="mxb"></tbody><tfoot id="mxf"></tfoot>
+  </table></div>
+  <div class="legend">
+    <span class="en">Share of that market's dock revenue</span><span class="zh">佔該市場 dock 營收比重</span>
+    <i style="background:var(--h0)"></i><i style="background:var(--h1)"></i><i style="background:var(--h2)"></i>
+    <i style="background:var(--h3)"></i><i style="background:var(--h4)"></i><i style="background:var(--h5)"></i>
+    <span class="en">under 1% to over 15%</span><span class="zh">1% 以下至 15% 以上</span>
+    <span style="margin-left:14px;color:var(--oxide)">—</span>
+    <span class="en">no dock sales in that market</span><span class="zh">該市場無 dock 銷售</span>
+  </div>
+</section>
+
+<section>
+  <div class="two">
+    <div class="panel">
+      <h3><span class="en b">Where the money sits by price</span><span class="zh b">營收在各價格帶的分布</span></h3>
+      <p class="sub">
+        <span class="en b">Every dock ASIN bucketed by its own average selling price, in US dollars, across all
+        eight markets. Price is a cleaner way to separate real docks from cheap adapters than the category
+        field is — see the note on Italy below.</span>
+        <span class="zh b">將八個市場所有 dock ASIN 依其平均售價（美元）分組。要區分真正的 dock 與廉價轉接器，價格比品類欄位更可靠——原因見下方關於義大利的說明。</span>
+      </p>
+      <div id="bands"></div>
+    </div>
+    <div class="panel">
+      <h3><span class="en b">Who ASUS actually competes with</span><span class="zh b">ASUS 真正的競爭對手</span></h3>
+      <p class="sub">
+        <span class="en b">Brands selling docks at $150 and above — the band ASUS sits in. This is the
+        competitive set, not Anker and UGREEN.</span>
+        <span class="zh b">售價 150 美元以上的 dock 品牌——也就是 ASUS 所在的價格帶。這才是真正的競爭組合，不是 Anker 和 UGREEN。</span>
+      </p>
+      <div id="comp"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="asus">
+    <h2><span class="en b">ASUS: present everywhere, invisible in the two biggest markets</span><span class="zh b">ASUS：八國都在，但在兩個最大的市場等於不存在</span></h2>
+    <p class="lede">
+      <span class="en b">ASUS sells docks in all eight markets. Its strongest position is France at 1.01% of
+      that market's dock revenue, rank 22 of 227 brands. Its weakest is the United States at 0.018%, rank 103
+      of 403 — in the largest and fastest-growing market of the eight.</span>
+      <span class="zh b">ASUS 在八個市場都有 dock 銷售。最強的是法國，佔該市場 dock 營收 1.01%，在 227 個品牌中排名第 22。最弱的是美國，0.018%，403 個品牌中排名第 103——而美國正是八國中最大且成長最快的市場。</span>
+    </p>
+    <table class="atab" id="atab"></table>
+    <div class="atwo">
+      <div>
+        <p class="asub"><span class="en">Listings that stopped selling</span><span class="zh">停止出貨的 listing</span></p>
+        <p class="anote">
+          <span class="en b">ASUS ASINs that took real revenue in 2025 and lost at least three quarters of it
+          this year. The US account shipped in all 35 weeks, so this is not an outage — individual listings
+          died while the market grew 13.6%.</span>
+          <span class="zh b">2025 年有實際營收、今年卻掉了至少四分之三的 ASUS ASIN。美國帳號 35 週都有出貨，所以不是斷貨——是在市場成長 13.6% 的同時，個別 listing 自己死掉。</span>
+        </p>
+        <div class="dead" id="dead"></div>
+      </div>
+      <div>
+        <p class="asub"><span class="en">DG300 rollout, 2026</span><span class="zh">DG300 上市節奏，2026</span></p>
+        <p class="anote">
+          <span class="en b">Bar shows the weeks in which DG300 recorded sales, positioned by first week on
+          sale. Germany, Spain and the Netherlands launched in week 5. The US did not start until week 15 and
+          has sold five units all year.</span>
+          <span class="zh b">長條代表 DG300 有銷售紀錄的週數，位置以首次出貨週對齊。德國、西班牙、荷蘭在第 5 週上市。美國到第 15 週才開始，而且全年只賣出 5 台。</span>
+        </p>
+        <div class="roll" id="roll"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p><span class="en b">Source: ASIN-level weekly retail sales and units for the Dock segment on Amazon in eight
+  markets, 2026 weeks 1–35, with the aligned 2025 weeks as the comparison. 19,512 ASINs, 3,126 brands, 565,106
+  rows. Country is taken from the file, not inferred.</span>
+  <span class="zh b">資料來源：Amazon 八個市場 Dock 區隔的 ASIN 週層級零售營收與數量，2026 年第 1 至 35 週，對照期為對齊的 2025 年同週。共 19,512 個 ASIN、3,126 個品牌、565,106 筆資料。國別取自檔案本身，非推論而得。</span></p>
+  <p><span class="en b">Two figures on this page need a caveat. France's whole category fell 51.6% and Spain's
+  26.6%, across both docks and hubs, while Germany, Italy and the UK held flat or grew — the cause is unexplained
+  and sits in the source, so treat those two year-on-year numbers as unverified. Italy's docking-station
+  subcategory averages €28 against €72 in Germany because cheap multiport adapters are filed there as docks, so
+  read Italy through the price bands rather than the category split.</span>
+  <span class="zh b">本頁有兩個數字需要但書。法國整體品類下滑 51.6%、西班牙 26.6%，且 dock 與 hub 同步下滑，而德國、義大利、英國同期持平或成長——原因不明且來自來源端，這兩個年增率請視為未經驗證。義大利 docking station 子品類均價 €28、德國 €72，因廉價多埠轉接器在當地被歸為 dock，故義大利宜以價格帶而非品類切分來解讀。</span></p>
+
+  <p><span class="en b">Local currency converted at period-average rates: 1.165 US dollars per euro, 1.345 per
+  pound, 0.715 per Canadian dollar. Share, price and rank are measured from the data, not modelled. No global
+  market-size assumption is used anywhere on this page.</span>
+  <span class="zh b">當地幣別以期間平均匯率換算：1 歐元兌 1.165 美元、1 英鎊兌 1.345 美元、1 加幣兌 0.715 美元。市佔、售價與排名皆由資料實測，非模型推估。本頁未使用任何全球市場規模假設。</span></p>
+</div></footer>
+
+</div>
+
+<script>
+const D = {"excluded":{"rows":28019,"rev":3354633.3100000005},"markets":[{"cc":"US","name":"United States","zh":"\u7f8e\u570b","cur":"USD","fx":1.0,"dock":157044029,"dockLY":138349729,"dockU":1279362,"dockULY":1208657,"hub":28401527,"hubLY":31234089,"hubU":1408766,"asus":28515,"asusLY":176441,"asusU":83,"asusRank":104,"brands":402,"asins":2200},{"cc":"CA","name":"Canada","zh":"\u52a0\u62ff\u5927","cur":"CAD","fx":0.715,"dock":12041383,"dockLY":12465565,"dockU":113460,"dockULY":126019,"hub":1677553,"hubLY":2108313,"hubU":71300,"asus":24931,"asusLY":7255,"asusU":98,"asusRank":34,"brands":158,"asins":769},{"cc":"UK","name":"United Kingdom","zh":"\u82f1\u570b","cur":"GBP","fx":1.345,"dock":12302825,"dockLY":10689743,"dockU":221583,"dockULY":163140,"hub":11155201,"hubLY":12876286,"hubU":707672,"asus":5210,"asusLY":7487,"asusU":31,"asusRank":65,"brands":232,"asins":1061},{"cc":"DE","name":"Germany","zh":"\u5fb7\u570b","cur":"EUR","fx":1.165,"dock":24489926,"dockLY":21289658,"dockU":341792,"dockULY":303292,"hub":19789389,"hubLY":22481848,"hubU":979170,"asus":72057,"asusLY":68834,"asusU":461,"asusRank":35,"brands":257,"asins":1311},{"cc":"FR","name":"France","zh":"\u6cd5\u570b","cur":"EUR","fx":1.165,"dock":3632411,"dockLY":7818622,"dockU":68248,"dockULY":131951,"hub":5214163,"hubLY":10489724,"hubU":279712,"asus":36688,"asusLY":45631,"asusU":219,"asusRank":22,"brands":226,"asins":994},{"cc":"ES","name":"Spain","zh":"\u897f\u73ed\u7259","cur":"EUR","fx":1.165,"dock":3406405,"dockLY":4239867,"dockU":72785,"dockULY":88809,"hub":3304762,"hubLY":4893463,"hubU":187952,"asus":21370,"asusLY":12550,"asusU":178,"asusRank":23,"brands":164,"asins":741},{"cc":"IT","name":"Italy","zh":"\u7fa9\u5927\u5229","cur":"EUR","fx":1.165,"dock":3502574,"dockLY":2958545,"dockU":100983,"dockULY":79775,"hub":4638824,"hubLY":5162631,"hubU":245100,"asus":6047,"asusLY":8346,"asusU":42,"asusRank":54,"brands":301,"asins":1024},{"cc":"NL","name":"Netherlands","zh":"\u8377\u862d","cur":"EUR","fx":1.165,"dock":1221189,"dockLY":853779,"dockU":18863,"dockULY":14745,"hub":898118,"hubLY":978610,"hubU":42183,"asus":6977,"asusLY":1005,"asusU":42,"asusRank":23,"brands":185,"asins":808}],"brands":{"Anker":{"CA":{"s":2102989,"u":34343,"sh":0.174647,"asp":61.23,"ly":1833863},"FR":{"s":158821,"u":5425,"sh":0.043723,"asp":29.28,"ly":236845},"DE":{"s":1322821,"u":9097,"sh":0.054015,"asp":145.41,"ly":703517},"IT":{"s":256403,"u":12094,"sh":0.073204,"asp":21.2,"ly":80886},"NL":{"s":115185,"u":3099,"sh":0.094322,"asp":37.17,"ly":59030},"ES":{"s":117275,"u":4149,"sh":0.034428,"asp":28.27,"ly":100285},"UK":{"s":1510586,"u":70152,"sh":0.122784,"asp":21.53,"ly":628698},"US":{"s":24006067,"u":230727,"sh":0.152862,"asp":104.05,"ly":16194178}},"Dell":{"CA":{"s":1072217,"u":4337,"sh":0.089044,"asp":247.23,"ly":1572408},"FR":{"s":210950,"u":1139,"sh":0.058074,"asp":185.21,"ly":657163},"DE":{"s":1271705,"u":7226,"sh":0.051928,"asp":175.99,"ly":728229},"IT":{"s":98371,"u":756,"sh":0.028085,"asp":130.12,"ly":62628},"NL":{"s":61915,"u":325,"sh":0.050701,"asp":190.51,"ly":49301},"ES":{"s":61779,"u":323,"sh":0.018136,"asp":191.27,"ly":150784},"UK":{"s":1799264,"u":14696,"sh":0.146248,"asp":122.43,"ly":1658652},"US":{"s":24374324,"u":147584,"sh":0.155207,"asp":165.16,"ly":20797526}},"Plugable":{"CA":{"s":1384232,"u":6512,"sh":0.114956,"asp":212.57,"ly":1914447},"FR":{"s":249,"u":2,"sh":6.9e-05,"asp":124.66,"ly":350},"DE":{"s":235,"u":1,"sh":1e-05,"asp":235.41},"NL":{"s":178,"u":1,"sh":0.000146,"asp":178.31,"ly":1828},"ES":{"s":530,"u":1,"sh":0.000156,"asp":529.99},"UK":{"s":195517,"u":1194,"sh":0.015892,"asp":163.75,"ly":179358},"US":{"s":22601211,"u":142749,"sh":0.143916,"asp":158.33,"ly":17395018}},"UGREEN":{"CA":{"s":1582773,"u":24355,"sh":0.131444,"asp":64.99,"ly":808612},"FR":{"s":718907,"u":15906,"sh":0.197914,"asp":45.2,"ly":1022855},"DE":{"s":6101378,"u":128111,"sh":0.249138,"asp":47.63,"ly":3598447},"IT":{"s":572761,"u":16941,"sh":0.163526,"asp":33.81,"ly":313511},"NL":{"s":385036,"u":8717,"sh":0.315296,"asp":44.17,"ly":293583},"ES":{"s":970984,"u":24256,"sh":0.285046,"asp":40.03,"ly":806821},"UK":{"s":2001389,"u":40661,"sh":0.162677,"asp":49.22,"ly":1298960},"US":{"s":4814627,"u":102960,"sh":0.030658,"asp":46.76,"ly":2270383}},"Lenovo":{"CA":{"s":1297352,"u":5811,"sh":0.107741,"asp":223.26,"ly":1961020},"FR":{"s":102673,"u":685,"sh":0.028266,"asp":149.89,"ly":298983},"DE":{"s":2992196,"u":18998,"sh":0.122181,"asp":157.5,"ly":2017478},"IT":{"s":163885,"u":1145,"sh":0.04679,"asp":143.13,"ly":106481},"NL":{"s":38807,"u":249,"sh":0.031778,"asp":155.85,"ly":20112},"ES":{"s":157795,"u":1035,"sh":0.046323,"asp":152.46,"ly":168740},"UK":{"s":467831,"u":4058,"sh":0.038026,"asp":115.29,"ly":509550},"US":{"s":9270986,"u":66850,"sh":0.059034,"asp":138.68,"ly":9533276}},"CalDigit":{"CA":{"s":361664,"u":595,"sh":0.030035,"asp":607.84,"ly":154489},"FR":{"s":64950,"u":137,"sh":0.017881,"asp":474.08,"ly":16086},"DE":{"s":676359,"u":1474,"sh":0.027618,"asp":458.86,"ly":436855},"IT":{"s":31152,"u":71,"sh":0.008894,"asp":438.76,"ly":7089},"NL":{"s":62602,"u":127,"sh":0.051264,"asp":492.93,"ly":9699},"ES":{"s":58190,"u":114,"sh":0.017083,"asp":510.44,"ly":38011},"UK":{"s":739621,"u":1948,"sh":0.060118,"asp":379.68,"ly":345169},"US":{"s":10325689,"u":24642,"sh":0.06575,"asp":419.03,"ly":8029186}},"Wavlink":{"CA":{"s":1037902,"u":8382,"sh":0.086195,"asp":123.83,"ly":732060},"FR":{"s":276390,"u":2358,"sh":0.07609,"asp":117.21,"ly":404260},"DE":{"s":1198678,"u":10301,"sh":0.048946,"asp":116.37,"ly":874437},"IT":{"s":214629,"u":3151,"sh":0.061278,"asp":68.11,"ly":123801},"NL":{"s":27012,"u":239,"sh":0.022119,"asp":113.02,"ly":16842},"ES":{"s":278049,"u":3137,"sh":0.081625,"asp":88.64,"ly":252964},"UK":{"s":901815,"u":9524,"sh":0.073301,"asp":94.69,"ly":791223},"US":{"s":5424363,"u":50787,"sh":0.03454,"asp":106.81,"ly":4953872}},"HP":{"CA":{"s":551112,"u":2737,"sh":0.045768,"asp":201.36,"ly":615527},"FR":{"s":228321,"u":1730,"sh":0.062857,"asp":131.98,"ly":538977},"DE":{"s":1479129,"u":13847,"sh":0.060397,"asp":106.82,"ly":1466501},"IT":{"s":247718,"u":2350,"sh":0.070725,"asp":105.41,"ly":271904},"NL":{"s":106203,"u":965,"sh":0.086967,"asp":110.06,"ly":53138},"ES":{"s":305843,"u":2145,"sh":0.089785,"asp":142.58,"ly":365628},"UK":{"s":688858,"u":5431,"sh":0.055992,"asp":126.84,"ly":659355},"US":{"s":4680147,"u":28411,"sh":0.029801,"asp":164.73,"ly":4147308}},"Koncept":{"FR":{"s":645,"u":1,"sh":0.000178,"asp":645.39},"US":{"s":6660829,"u":35874,"sh":0.042414,"asp":185.67,"ly":6757907}},"Microsoft":{"CA":{"s":80614,"u":341,"sh":0.006695,"asp":236.4,"ly":99622},"FR":{"s":29322,"u":121,"sh":0.008072,"asp":242.33,"ly":181179},"DE":{"s":557233,"u":2820,"sh":0.022754,"asp":197.6,"ly":919001},"IT":{"s":18322,"u":79,"sh":0.005231,"asp":231.92,"ly":28150},"NL":{"s":9268,"u":47,"sh":0.00759,"asp":197.2,"ly":4931},"ES":{"s":37203,"u":161,"sh":0.010922,"asp":231.08,"ly":59217},"UK":{"s":330974,"u":1942,"sh":0.026902,"asp":170.43,"ly":424590},"US":{"s":3650302,"u":17902,"sh":0.023244,"asp":203.9,"ly":5643425}},"Baseus":{"CA":{"s":24198,"u":247,"sh":0.00201,"asp":97.97,"ly":11676},"FR":{"s":58603,"u":668,"sh":0.016133,"asp":87.73,"ly":145965},"DE":{"s":908290,"u":11046,"sh":0.037088,"asp":82.23,"ly":975360},"IT":{"s":406952,"u":11607,"sh":0.116187,"asp":35.06,"ly":568267},"NL":{"s":50596,"u":622,"sh":0.041431,"asp":81.34,"ly":19889},"ES":{"s":205960,"u":3445,"sh":0.060463,"asp":59.79,"ly":316657},"UK":{"s":35724,"u":552,"sh":0.002904,"asp":64.72,"ly":44117},"US":{"s":2003170,"u":22635,"sh":0.012755,"asp":88.5,"ly":3262287}},"StarTech":{"CA":{"s":395098,"u":1753,"sh":0.032812,"asp":225.38,"ly":322355},"FR":{"s":73228,"u":667,"sh":0.02016,"asp":109.79,"ly":134579},"DE":{"s":299380,"u":1941,"sh":0.012225,"asp":154.24,"ly":173020},"IT":{"s":49060,"u":448,"sh":0.014007,"asp":109.51,"ly":27442},"NL":{"s":21172,"u":205,"sh":0.017337,"asp":103.28,"ly":18213},"ES":{"s":56392,"u":440,"sh":0.016555,"asp":128.16,"ly":52203},"UK":{"s":498343,"u":4264,"sh":0.040506,"asp":116.87,"ly":365089},"US":{"s":2415335,"u":15153,"sh":0.01538,"asp":159.4,"ly":1338916}},"Acer":{"CA":{"s":3326,"u":38,"sh":0.000276,"asp":87.53,"ly":1799},"FR":{"s":90365,"u":4409,"sh":0.024878,"asp":20.5,"ly":71909},"DE":{"s":229125,"u":12821,"sh":0.009356,"asp":17.87,"ly":128435},"IT":{"s":99833,"u":5188,"sh":0.028503,"asp":19.24,"ly":35569},"NL":{"s":8491,"u":291,"sh":0.006953,"asp":29.18,"ly":3282},"ES":{"s":47091,"u":1900,"sh":0.013824,"asp":24.78,"ly":26119},"UK":{"s":62842,"u":2462,"sh":0.005108,"asp":25.52,"ly":14827},"US":{"s":2870970,"u":52773,"sh":0.018281,"asp":54.4,"ly":884691}},"Kensington":{"CA":{"s":128362,"u":514,"sh":0.01066,"asp":249.73,"ly":143213},"FR":{"s":20899,"u":164,"sh":0.005754,"asp":127.43,"ly":50683},"DE":{"s":205160,"u":825,"sh":0.008377,"asp":248.68,"ly":179488},"IT":{"s":15273,"u":102,"sh":0.00436,"asp":149.73,"ly":11691},"NL":{"s":16661,"u":65,"sh":0.013644,"asp":256.33,"ly":20348},"ES":{"s":2179,"u":15,"sh":0.00064,"asp":145.25,"ly":11344},"UK":{"s":149314,"u":1042,"sh":0.012137,"asp":143.3,"ly":165527},"US":{"s":2790277,"u":16137,"sh":0.017767,"asp":172.91,"ly":2863399}},"ivanky":{"CA":{"s":91649,"u":147,"sh":0.007611,"asp":623.46,"ly":129662},"FR":{"s":45390,"u":169,"sh":0.012496,"asp":268.58,"ly":110639},"DE":{"s":560163,"u":2340,"sh":0.022873,"asp":239.39,"ly":569389},"IT":{"s":12949,"u":102,"sh":0.003697,"asp":126.95,"ly":17610},"NL":{"s":25766,"u":74,"sh":0.021099,"asp":348.19,"ly":14513},"ES":{"s":18484,"u":52,"sh":0.005426,"asp":355.47,"ly":36730},"UK":{"s":97616,"u":268,"sh":0.007934,"asp":364.24,"ly":132015},"US":{"s":2078894,"u":6935,"sh":0.013238,"asp":299.77,"ly":1983771}},"TOBENONE":{"CA":{"s":54333,"u":417,"sh":0.004512,"asp":130.29,"ly":69245},"FR":{"s":4872,"u":49,"sh":0.001341,"asp":99.43},"DE":{"s":19202,"u":198,"sh":0.000784,"asp":96.98},"NL":{"s":2331,"u":7,"sh":0.001909,"asp":332.96,"ly":1247},"UK":{"s":41740,"u":408,"sh":0.003393,"asp":102.3,"ly":3261},"US":{"s":2770802,"u":20937,"sh":0.017643,"asp":132.34,"ly":821488}},"OWC":{"CA":{"s":122273,"u":508,"sh":0.010154,"asp":240.7,"ly":150346},"FR":{"s":21348,"u":75,"sh":0.005877,"asp":284.63,"ly":60727},"DE":{"s":181740,"u":752,"sh":0.007421,"asp":241.68,"ly":184631},"IT":{"s":10394,"u":51,"sh":0.002967,"asp":203.8,"ly":9438},"NL":{"s":29595,"u":116,"sh":0.024234,"asp":255.13,"ly":14190},"ES":{"s":7788,"u":28,"sh":0.002286,"asp":278.15,"ly":28515},"UK":{"s":84212,"u":460,"sh":0.006845,"asp":183.07,"ly":19657},"US":{"s":1916392,"u":10533,"sh":0.012203,"asp":181.94,"ly":2068779}},"Belkin":{"CA":{"s":67439,"u":510,"sh":0.005601,"asp":132.23,"ly":85232},"FR":{"s":179028,"u":1159,"sh":0.049286,"asp":154.47,"ly":299691},"DE":{"s":218092,"u":1870,"sh":0.008905,"asp":116.63,"ly":247812},"IT":{"s":41613,"u":213,"sh":0.011881,"asp":195.37,"ly":61195},"NL":{"s":24799,"u":230,"sh":0.020308,"asp":107.82,"ly":34493},"ES":{"s":42129,"u":207,"sh":0.012368,"asp":203.52,"ly":43504},"UK":{"s":149441,"u":972,"sh":0.012147,"asp":153.75,"ly":190746},"US":{"s":1474810,"u":14208,"sh":0.009391,"asp":103.8,"ly":1763694}},"selore&s-global":{"CA":{"s":237305,"u":3419,"sh":0.019707,"asp":69.41,"ly":195143},"FR":{"s":88598,"u":1982,"sh":0.024391,"asp":44.7,"ly":459136},"DE":{"s":517431,"u":10844,"sh":0.021128,"asp":47.72,"ly":623358},"IT":{"s":2489,"u":46,"sh":0.000711,"asp":54.1,"ly":3999},"NL":{"s":7396,"u":124,"sh":0.006056,"asp":59.64,"ly":7231},"ES":{"s":7876,"u":149,"sh":0.002312,"asp":52.86,"ly":19855},"UK":{"s":204938,"u":4238,"sh":0.016658,"asp":48.36,"ly":295434},"US":{"s":1132927,"u":15402,"sh":0.007214,"asp":73.56,"ly":1113455}},"MOKiN":{"CA":{"s":64715,"u":918,"sh":0.005374,"asp":70.5,"ly":1682},"FR":{"s":108990,"u":2190,"sh":0.030005,"asp":49.77,"ly":404463},"DE":{"s":429852,"u":8554,"sh":0.017552,"asp":50.25,"ly":343274},"IT":{"s":22692,"u":327,"sh":0.006479,"asp":69.4,"ly":7783},"NL":{"s":6052,"u":121,"sh":0.004956,"asp":50.02,"ly":3895},"ES":{"s":2778,"u":47,"sh":0.000816,"asp":59.11,"ly":11193},"UK":{"s":249819,"u":6487,"sh":0.020306,"asp":38.51,"ly":433858},"US":{"s":860410,"u":17522,"sh":0.005479,"asp":49.1,"ly":716923}},"Satechi":{"CA":{"s":53551,"u":205,"sh":0.004447,"asp":261.23,"ly":59498},"FR":{"s":72307,"u":921,"sh":0.019906,"asp":78.51,"ly":194720},"DE":{"s":372316,"u":3153,"sh":0.015203,"asp":118.08,"ly":343171},"IT":{"s":19105,"u":158,"sh":0.005455,"asp":120.92,"ly":22894},"NL":{"s":40237,"u":317,"sh":0.032949,"asp":126.93,"ly":26358},"ES":{"s":73163,"u":803,"sh":0.021478,"asp":91.11,"ly":116627},"UK":{"s":34594,"u":487,"sh":0.002812,"asp":71.03,"ly":34065},"US":{"s":975883,"u":4312,"sh":0.006214,"asp":226.32,"ly":648759}},"AmazonBasics":{"CA":{"s":96452,"u":869,"sh":0.00801,"asp":110.99,"ly":46085},"FR":{"s":40529,"u":1399,"sh":0.011158,"asp":28.97,"ly":71559},"DE":{"s":210400,"u":1604,"sh":0.008591,"asp":131.17,"ly":136195},"IT":{"s":113653,"u":2572,"sh":0.032449,"asp":44.19,"ly":21334},"NL":{"s":2900,"u":30,"sh":0.002375,"asp":96.67},"ES":{"s":70685,"u":2587,"sh":0.020751,"asp":27.32,"ly":45291},"UK":{"s":90629,"u":2583,"sh":0.007367,"asp":35.09,"ly":72340},"US":{"s":1007545,"u":18181,"sh":0.006416,"asp":55.42,"ly":499924}},"LIONWEI":{"CA":{"s":4058,"u":118,"sh":0.000337,"asp":34.39,"ly":1476},"FR":{"s":9562,"u":169,"sh":0.002632,"asp":56.58,"ly":53335},"DE":{"s":271721,"u":6242,"sh":0.011095,"asp":43.53,"ly":256146},"IT":{"s":197,"u":4,"sh":5.6e-05,"asp":49.24,"ly":584},"NL":{"s":2185,"u":39,"sh":0.001789,"asp":56.01,"ly":4105},"ES":{"s":3605,"u":83,"sh":0.001058,"asp":43.44,"ly":12449},"UK":{"s":2514,"u":133,"sh":0.000204,"asp":18.9,"ly":2761},"US":{"s":1342076,"u":28132,"sh":0.008546,"asp":47.71,"ly":4599584}},"Razer":{"CA":{"s":80634,"u":237,"sh":0.006696,"asp":340.23,"ly":123012},"FR":{"s":72417,"u":311,"sh":0.019936,"asp":232.85,"ly":73195},"DE":{"s":127723,"u":483,"sh":0.005215,"asp":264.44,"ly":100535},"IT":{"s":470,"u":3,"sh":0.000134,"asp":156.82,"ly":4014},"NL":{"s":6124,"u":29,"sh":0.005014,"asp":211.16,"ly":1239},"ES":{"s":5014,"u":17,"sh":0.001472,"asp":294.93,"ly":9398},"UK":{"s":63895,"u":284,"sh":0.005194,"asp":224.98,"ly":66724},"US":{"s":1291842,"u":5655,"sh":0.008226,"asp":228.44,"ly":1139476}},"Targus":{"CA":{"s":108484,"u":562,"sh":0.009009,"asp":193.03,"ly":138717},"FR":{"s":23723,"u":219,"sh":0.006531,"asp":108.33,"ly":41501},"DE":{"s":16545,"u":136,"sh":0.000676,"asp":121.66,"ly":28678},"IT":{"s":743,"u":8,"sh":0.000212,"asp":92.91,"ly":1974},"NL":{"s":1534,"u":7,"sh":0.001256,"asp":219.15,"ly":3401},"ES":{"s":10677,"u":124,"sh":0.003134,"asp":86.11,"ly":15600},"UK":{"s":75241,"u":729,"sh":0.006116,"asp":103.21,"ly":128365},"US":{"s":1138034,"u":7232,"sh":0.007247,"asp":157.36,"ly":1193558}},"Lemorele":{"CA":{"s":22297,"u":377,"sh":0.001852,"asp":59.14,"ly":128807},"FR":{"s":31743,"u":1128,"sh":0.008739,"asp":28.14,"ly":166478},"DE":{"s":245046,"u":7111,"sh":0.010006,"asp":34.46,"ly":445658},"IT":{"s":120081,"u":2928,"sh":0.034284,"asp":41.01,"ly":65153},"NL":{"s":11015,"u":379,"sh":0.00902,"asp":29.06,"ly":24373},"ES":{"s":300235,"u":9418,"sh":0.088138,"asp":31.88,"ly":527714},"UK":{"s":125435,"u":4296,"sh":0.010196,"asp":29.2,"ly":100219},"US":{"s":301737,"u":10160,"sh":0.001921,"asp":29.7,"ly":107443}},"Aom":{"US":{"s":1152105,"u":4327,"sh":0.007336,"asp":266.26,"ly":1454887}},"AOOSTAR":{"FR":{"s":6063,"u":24,"sh":0.001669,"asp":252.64},"DE":{"s":258679,"u":1008,"sh":0.010563,"asp":256.63,"ly":25654},"IT":{"s":4076,"u":20,"sh":0.001164,"asp":203.78},"NL":{"s":3744,"u":12,"sh":0.003066,"asp":312.0},"UK":{"s":61581,"u":225,"sh":0.005005,"asp":273.7,"ly":12585},"US":{"s":709507,"u":3026,"sh":0.004518,"asp":234.47,"ly":101443}},"Benfei":{"CA":{"s":158255,"u":5922,"sh":0.013143,"asp":26.72,"ly":125135},"FR":{"s":152724,"u":3883,"sh":0.042045,"asp":39.33,"ly":90694},"DE":{"s":168669,"u":6651,"sh":0.006887,"asp":25.36,"ly":71373},"IT":{"s":48111,"u":1533,"sh":0.013736,"asp":31.38,"ly":8071},"NL":{"s":11720,"u":340,"sh":0.009597,"asp":34.47,"ly":2057},"ES":{"s":99989,"u":2794,"sh":0.029353,"asp":35.79,"ly":32535},"UK":{"s":51180,"u":1514,"sh":0.00416,"asp":33.8,"ly":36294},"US":{"s":275337,"u":11193,"sh":0.001753,"asp":24.6,"ly":117857}},"ANYHDD":{"US":{"s":950751,"u":5173,"sh":0.006054,"asp":183.79,"ly":187143}},"v AV Access":{"CA":{"s":34315,"u":141,"sh":0.00285,"asp":243.37},"FR":{"s":11749,"u":57,"sh":0.003234,"asp":206.12,"ly":595},"DE":{"s":60918,"u":326,"sh":0.002487,"asp":186.87,"ly":1220},"IT":{"s":1687,"u":8,"sh":0.000482,"asp":210.87},"NL":{"s":21570,"u":94,"sh":0.017663,"asp":229.47},"ES":{"s":6490,"u":31,"sh":0.001905,"asp":209.34,"ly":1000},"UK":{"s":111712,"u":522,"sh":0.00908,"asp":214.01,"ly":40818},"US":{"s":629352,"u":3312,"sh":0.004007,"asp":190.02,"ly":239994}},"Novoo":{"CA":{"s":27441,"u":740,"sh":0.002279,"asp":37.08,"ly":37102},"FR":{"s":88785,"u":2755,"sh":0.024442,"asp":32.23,"ly":338325},"DE":{"s":135973,"u":4619,"sh":0.005552,"asp":29.44,"ly":319638},"IT":{"s":111762,"u":3358,"sh":0.031909,"asp":33.28,"ly":86832},"NL":{"s":5941,"u":152,"sh":0.004865,"asp":39.09,"ly":10176},"ES":{"s":128415,"u":3677,"sh":0.037698,"asp":34.92,"ly":212533},"UK":{"s":209831,"u":7179,"sh":0.017055,"asp":29.23,"ly":315236},"US":{"s":38903,"u":1161,"sh":0.000248,"asp":33.51,"ly":53522}},"Icy Box":{"FR":{"s":14321,"u":242,"sh":0.003942,"asp":59.18,"ly":43312},"DE":{"s":611225,"u":6305,"sh":0.024958,"asp":96.94,"ly":819068},"IT":{"s":40860,"u":609,"sh":0.011666,"asp":67.09,"ly":48842},"NL":{"s":1276,"u":24,"sh":0.001045,"asp":53.16,"ly":2294},"ES":{"s":19388,"u":157,"sh":0.005692,"asp":123.49,"ly":25181},"UK":{"s":248,"u":3,"sh":2e-05,"asp":82.63,"ly":1732}},"I-Tec":{"FR":{"s":35421,"u":303,"sh":0.009751,"asp":116.9,"ly":86612},"DE":{"s":507823,"u":4042,"sh":0.020736,"asp":125.64,"ly":527346},"IT":{"s":31906,"u":284,"sh":0.009109,"asp":112.34,"ly":28770},"NL":{"s":17073,"u":123,"sh":0.01398,"asp":138.8,"ly":10730},"ES":{"s":23007,"u":210,"sh":0.006754,"asp":109.56,"ly":28938},"UK":{"s":20436,"u":201,"sh":0.001661,"asp":101.67,"ly":32754},"US":{"s":980,"u":5,"sh":6e-06,"asp":195.97,"ly":5640}},"MINISFORUM":{"CA":{"s":55399,"u":302,"sh":0.004601,"asp":183.44,"ly":32376},"IT":{"s":18735,"u":136,"sh":0.005349,"asp":137.75,"ly":12724},"UK":{"s":41096,"u":339,"sh":0.00334,"asp":121.23,"ly":37456},"US":{"s":607400,"u":4033,"sh":0.003868,"asp":150.61,"ly":423710}},"J5 Create":{"CA":{"s":42404,"u":349,"sh":0.003522,"asp":121.5,"ly":30722},"FR":{"s":8131,"u":105,"sh":0.002238,"asp":77.43,"ly":23367},"DE":{"s":5267,"u":47,"sh":0.000215,"asp":112.05,"ly":15441},"IT":{"s":1550,"u":24,"sh":0.000442,"asp":64.57,"ly":1388},"NL":{"s":1430,"u":12,"sh":0.001171,"asp":119.19,"ly":910},"ES":{"s":376,"u":4,"sh":0.00011,"asp":93.99,"ly":135},"UK":{"s":2650,"u":32,"sh":0.000215,"asp":82.81,"ly":10785},"US":{"s":651540,"u":8061,"sh":0.004149,"asp":80.83,"ly":574509}},"Rocketek":{"CA":{"s":9285,"u":71,"sh":0.000771,"asp":130.78,"ly":14177},"FR":{"s":32601,"u":246,"sh":0.008975,"asp":132.52,"ly":73887},"DE":{"s":178451,"u":1616,"sh":0.007287,"asp":110.43,"ly":210807},"IT":{"s":4264,"u":38,"sh":0.001217,"asp":112.22,"ly":4596},"NL":{"s":2721,"u":23,"sh":0.002228,"asp":118.32,"ly":828},"ES":{"s":3925,"u":45,"sh":0.001152,"asp":87.22,"ly":16823},"UK":{"s":105502,"u":922,"sh":0.008575,"asp":114.43,"ly":33181},"US":{"s":280465,"u":2136,"sh":0.001786,"asp":131.3,"ly":659985}},"Ascrono":{"CA":{"s":3755,"u":12,"sh":0.000312,"asp":312.92,"ly":1762},"FR":{"s":1944,"u":9,"sh":0.000535,"asp":215.99,"ly":8557},"DE":{"s":51553,"u":233,"sh":0.002105,"asp":221.26,"ly":57927},"IT":{"s":8253,"u":38,"sh":0.002356,"asp":217.19,"ly":4737},"NL":{"s":3685,"u":18,"sh":0.003018,"asp":204.74,"ly":7226},"ES":{"s":2309,"u":10,"sh":0.000678,"asp":230.87,"ly":16864},"UK":{"s":7255,"u":35,"sh":0.00059,"asp":207.28,"ly":21458},"US":{"s":481095,"u":2140,"sh":0.003063,"asp":224.81,"ly":524699}},"PULWTOP":{"CA":{"s":6103,"u":53,"sh":0.000507,"asp":115.16,"ly":614},"FR":{"s":23739,"u":275,"sh":0.006535,"asp":86.32,"ly":76743},"DE":{"s":169882,"u":1920,"sh":0.006937,"asp":88.48,"ly":192579},"IT":{"s":28205,"u":344,"sh":0.008053,"asp":81.99,"ly":33666},"NL":{"s":9048,"u":76,"sh":0.007409,"asp":119.05,"ly":6292},"ES":{"s":26468,"u":342,"sh":0.00777,"asp":77.39,"ly":42455},"UK":{"s":34644,"u":413,"sh":0.002816,"asp":83.88,"ly":34888},"US":{"s":204207,"u":2600,"sh":0.0013,"asp":78.54,"ly":137475}},"Orico":{"CA":{"s":15314,"u":227,"sh":0.001272,"asp":67.46,"ly":14754},"FR":{"s":24120,"u":562,"sh":0.00664,"asp":42.92,"ly":75076},"DE":{"s":48379,"u":1130,"sh":0.001975,"asp":42.81,"ly":42886},"IT":{"s":55934,"u":1048,"sh":0.015969,"asp":53.37,"ly":44716},"NL":{"s":2241,"u":37,"sh":0.001835,"asp":60.58,"ly":4464},"ES":{"s":26351,"u":736,"sh":0.007736,"asp":35.8,"ly":36168},"UK":{"s":13129,"u":322,"sh":0.001067,"asp":40.77,"ly":24107},"US":{"s":330825,"u":7194,"sh":0.002107,"asp":45.99,"ly":224076}},"ist computers":{"UK":{"s":709,"u":3,"sh":5.8e-05,"asp":236.32},"US":{"s":499900,"u":1440,"sh":0.003183,"asp":347.15,"ly":414542}},"ZMUIPNG":{"CA":{"s":50659,"u":857,"sh":0.004207,"asp":59.11,"ly":11463},"FR":{"s":192,"u":8,"sh":5.3e-05,"asp":23.99,"ly":48},"DE":{"s":136808,"u":2681,"sh":0.005586,"asp":51.03,"ly":311371},"NL":{"s":240,"u":5,"sh":0.000196,"asp":47.99},"UK":{"s":225979,"u":8079,"sh":0.018368,"asp":27.97,"ly":321699}},"minisopuru":{"CA":{"s":25837,"u":156,"sh":0.002146,"asp":165.62,"ly":53066},"FR":{"s":7630,"u":122,"sh":0.002101,"asp":62.54,"ly":53619},"DE":{"s":32623,"u":290,"sh":0.001332,"asp":112.49,"ly":199073},"IT":{"s":1593,"u":29,"sh":0.000455,"asp":54.93,"ly":8700},"NL":{"s":5023,"u":47,"sh":0.004113,"asp":106.87,"ly":5007},"ES":{"s":8482,"u":96,"sh":0.00249,"asp":88.36,"ly":50276},"UK":{"s":21258,"u":272,"sh":0.001728,"asp":78.15,"ly":93471},"US":{"s":386764,"u":3753,"sh":0.002463,"asp":103.05,"ly":807390}},"JSAUX":{"CA":{"s":595,"u":5,"sh":4.9e-05,"asp":118.99},"FR":{"s":82832,"u":2780,"sh":0.022803,"asp":29.8,"ly":76794},"DE":{"s":55500,"u":930,"sh":0.002266,"asp":59.68,"ly":22353},"IT":{"s":2035,"u":30,"sh":0.000581,"asp":67.82,"ly":748},"NL":{"s":289,"u":4,"sh":0.000237,"asp":72.21,"ly":4933},"ES":{"s":2069,"u":29,"sh":0.000607,"asp":71.36,"ly":7276},"UK":{"s":12338,"u":221,"sh":0.001003,"asp":55.83,"ly":17092},"US":{"s":288509,"u":6177,"sh":0.001837,"asp":46.71,"ly":88248}},"ITSPWR":{"CA":{"s":201590,"u":624,"sh":0.016741,"asp":323.06,"ly":11046},"FR":{"s":149,"u":1,"sh":4.1e-05,"asp":149.0},"NL":{"s":149,"u":1,"sh":0.000122,"asp":149.0},"US":{"s":323730,"u":1144,"sh":0.002061,"asp":282.98,"ly":788237}},"Sonnet":{"CA":{"s":4228,"u":8,"sh":0.000351,"asp":528.45,"ly":5585},"FR":{"s":1248,"u":2,"sh":0.000344,"asp":623.95,"ly":12418},"DE":{"s":38625,"u":88,"sh":0.001577,"asp":438.92,"ly":126724},"NL":{"s":761,"u":1,"sh":0.000623,"asp":760.56,"ly":5516},"UK":{"s":485,"u":2,"sh":3.9e-05,"asp":242.52,"ly":468},"US":{"s":353238,"u":1082,"sh":0.002249,"asp":326.47,"ly":444411}},"VisionTek":{"CA":{"s":1297,"u":5,"sh":0.000108,"asp":259.46,"ly":3762},"US":{"s":391969,"u":2461,"sh":0.002496,"asp":159.27,"ly":453017}},"Sabrent":{"CA":{"s":13897,"u":51,"sh":0.001154,"asp":272.48,"ly":3942},"FR":{"s":1366,"u":95,"sh":0.000376,"asp":14.38,"ly":12673},"DE":{"s":9054,"u":308,"sh":0.00037,"asp":29.39,"ly":49687},"NL":{"s":1004,"u":10,"sh":0.000822,"asp":100.41,"ly":1316},"ES":{"s":332,"u":9,"sh":9.8e-05,"asp":36.93,"ly":259},"UK":{"s":17964,"u":624,"sh":0.00146,"asp":28.79,"ly":26204},"US":{"s":343363,"u":5123,"sh":0.002186,"asp":67.02,"ly":658711}},"Vention":{"CA":{"s":8704,"u":69,"sh":0.000723,"asp":126.15,"ly":2186},"FR":{"s":31431,"u":632,"sh":0.008653,"asp":49.73,"ly":144333},"DE":{"s":74591,"u":3529,"sh":0.003046,"asp":21.14,"ly":54655},"IT":{"s":10735,"u":115,"sh":0.003065,"asp":93.35,"ly":34403},"NL":{"s":2483,"u":21,"sh":0.002033,"asp":118.24,"ly":17682},"ES":{"s":2227,"u":28,"sh":0.000654,"asp":79.53,"ly":74432},"UK":{"s":58000,"u":627,"sh":0.004714,"asp":92.5,"ly":83246},"US":{"s":157526,"u":4462,"sh":0.001003,"asp":35.3,"ly":37578}},"hodo":{"FR":{"s":450,"u":9,"sh":0.000124,"asp":49.99,"ly":2834},"DE":{"s":284758,"u":16434,"sh":0.011628,"asp":17.33,"ly":594805},"NL":{"s":200,"u":1,"sh":0.000164,"asp":200.0,"ly":98},"UK":{"s":35096,"u":1200,"sh":0.002853,"asp":29.25,"ly":74369}},"RayCue":{"CA":{"s":2537,"u":27,"sh":0.000211,"asp":93.98,"ly":9126},"FR":{"s":2805,"u":30,"sh":0.000772,"asp":93.51,"ly":28632},"DE":{"s":20053,"u":211,"sh":0.000819,"asp":95.04,"ly":172755},"NL":{"s":1029,"u":12,"sh":0.000843,"asp":85.75,"ly":2035},"ES":{"s":462,"u":5,"sh":0.000136,"asp":92.41,"ly":9188},"UK":{"s":12752,"u":146,"sh":0.001037,"asp":87.34,"ly":70954},"US":{"s":315400,"u":4397,"sh":0.002008,"asp":71.73,"ly":180783}},"Acasis":{"CA":{"s":1670,"u":7,"sh":0.000139,"asp":238.59,"ly":13638},"FR":{"s":7458,"u":201,"sh":0.002053,"asp":37.11,"ly":57521},"DE":{"s":107522,"u":1986,"sh":0.00439,"asp":54.14,"ly":86999},"IT":{"s":22767,"u":300,"sh":0.0065,"asp":75.89,"ly":8995},"NL":{"s":5641,"u":89,"sh":0.004619,"asp":63.38,"ly":504},"ES":{"s":10186,"u":162,"sh":0.00299,"asp":62.87,"ly":36962},"UK":{"s":67581,"u":888,"sh":0.005493,"asp":76.1,"ly":432},"US":{"s":72292,"u":1088,"sh":0.00046,"asp":66.44,"ly":196905}},"Hagibis":{"CA":{"s":6239,"u":100,"sh":0.000518,"asp":62.39,"ly":6725},"FR":{"s":60,"u":1,"sh":1.7e-05,"asp":59.98,"ly":210},"DE":{"s":14369,"u":300,"sh":0.000587,"asp":47.9,"ly":21924},"IT":{"s":2871,"u":54,"sh":0.00082,"asp":53.16,"ly":5058},"NL":{"s":2336,"u":48,"sh":0.001913,"asp":48.67,"ly":2255},"ES":{"s":463,"u":10,"sh":0.000136,"asp":46.33,"ly":2184},"UK":{"s":4624,"u":105,"sh":0.000376,"asp":44.04,"ly":5780},"US":{"s":228939,"u":4070,"sh":0.001458,"asp":56.25,"ly":222567}},"Cable Matters":{"CA":{"s":2262,"u":27,"sh":0.000188,"asp":83.79,"ly":3934},"FR":{"s":42,"u":2,"sh":1.2e-05,"asp":20.99,"ly":152},"DE":{"s":3594,"u":46,"sh":0.000147,"asp":78.14,"ly":6211},"NL":{"s":65,"u":1,"sh":5.3e-05,"asp":64.99,"ly":1034},"ES":{"s":105,"u":1,"sh":3.1e-05,"asp":104.99,"ly":420},"US":{"s":237352,"u":3116,"sh":0.001511,"asp":76.17,"ly":451428}},"Minthouz":{"FR":{"s":33,"u":1,"sh":9e-06,"asp":33.31,"ly":2940},"DE":{"s":109469,"u":1413,"sh":0.00447,"asp":77.47,"ly":53492},"IT":{"s":214,"u":6,"sh":6.1e-05,"asp":35.72},"NL":{"s":53,"u":2,"sh":4.3e-05,"asp":26.3},"UK":{"s":49216,"u":849,"sh":0.004,"asp":57.97,"ly":20654},"US":{"s":48062,"u":797,"sh":0.000306,"asp":60.3,"ly":4969}},"newq":{"FR":{"s":574,"u":7,"sh":0.000158,"asp":82.0,"ly":1107},"DE":{"s":15845,"u":220,"sh":0.000647,"asp":72.02,"ly":34332},"NL":{"s":364,"u":5,"sh":0.000298,"asp":72.85,"ly":295},"ES":{"s":323,"u":4,"sh":9.5e-05,"asp":80.82,"ly":1934},"UK":{"s":6984,"u":161,"sh":0.000568,"asp":43.38,"ly":1900},"US":{"s":199537,"u":3072,"sh":0.001271,"asp":64.95,"ly":283286}},"Asus":{"CA":{"s":24931,"u":98,"sh":0.00207,"asp":254.4,"ly":7255},"FR":{"s":36688,"u":219,"sh":0.0101,"asp":167.53,"ly":45631},"DE":{"s":72057,"u":461,"sh":0.002942,"asp":156.31,"ly":68834},"IT":{"s":6047,"u":42,"sh":0.001726,"asp":143.98,"ly":8346},"NL":{"s":6977,"u":42,"sh":0.005713,"asp":166.11,"ly":1005},"ES":{"s":21370,"u":178,"sh":0.006273,"asp":120.05,"ly":12550},"UK":{"s":5210,"u":31,"sh":0.000424,"asp":168.07,"ly":7487},"US":{"s":28515,"u":83,"sh":0.000182,"asp":343.55,"ly":176441}},"Smartlinx":{"CA":{"s":1263,"u":7,"sh":0.000105,"asp":180.5,"ly":2791},"US":{"s":212843,"u":969,"sh":0.001355,"asp":219.65,"ly":447156}},"Hiearcool":{"US":{"s":201239,"u":3132,"sh":0.001281,"asp":64.25,"ly":389059}},"Vicfluxion":{"CA":{"s":58,"u":1,"sh":5e-06,"asp":58.49},"UK":{"s":58,"u":1,"sh":5e-06,"asp":57.51},"US":{"s":200600,"u":6920,"sh":0.001277,"asp":28.99}}},"bands":[{"band":"< 50","lo":0,"US":{"s":14382121,"u":429812,"n":591},"CA":{"s":2727649,"u":69832,"n":195},"UK":{"s":2183675,"u":134252,"n":292},"DE":{"s":4926295,"u":194621,"n":378},"FR":{"s":1158254,"u":46950,"n":326},"ES":{"s":1371798,"u":54535,"n":256},"IT":{"s":1700400,"u":83863,"n":523},"NL":{"s":304086,"u":11766,"n":234}},{"band":"50\u2013100","lo":50,"US":{"s":11531228,"u":157020,"n":508},"CA":{"s":833081,"u":8285,"n":175},"UK":{"s":1618437,"u":32035,"n":230},"DE":{"s":3235129,"u":51575,"n":304},"FR":{"s":576345,"u":10085,"n":237},"ES":{"s":563652,"u":9011,"n":184},"IT":{"s":614276,"u":9384,"n":186},"NL":{"s":221381,"u":3504,"n":204}},{"band":"100\u2013150","lo":100,"US":{"s":31069142,"u":253480,"n":372},"CA":{"s":3201187,"u":18090,"n":169},"UK":{"s":1527672,"u":16672,"n":166},"DE":{"s":2853796,"u":28197,"n":182},"FR":{"s":470345,"u":4326,"n":151},"ES":{"s":335083,"u":3081,"n":101},"IT":{"s":370425,"u":3478,"n":113},"NL":{"s":145265,"u":1324,"n":105}},{"band":"150\u2013250","lo":150,"US":{"s":60285158,"u":321144,"n":397},"CA":{"s":3548913,"u":13435,"n":138},"UK":{"s":3895949,"u":27531,"n":224},"DE":{"s":6977846,"u":44664,"n":281},"FR":{"s":822743,"u":5056,"n":176},"ES":{"s":768668,"u":4995,"n":115},"IT":{"s":567978,"u":3438,"n":116},"NL":{"s":180755,"u":1127,"n":138}},{"band":"250+","lo":250,"US":{"s":39776379,"u":117906,"n":332},"CA":{"s":1730553,"u":3818,"n":92},"UK":{"s":3077092,"u":11093,"n":149},"DE":{"s":6496859,"u":22735,"n":166},"FR":{"s":604724,"u":1831,"n":104},"ES":{"s":367203,"u":1163,"n":85},"IT":{"s":249494,"u":820,"n":86},"NL":{"s":369703,"u":1142,"n":127}}],"comp":{"US":[{"b":"Dell","s":17730951,"sh":0.1772},{"b":"Plugable","s":16582072,"sh":0.165719},{"b":"Anker","s":15246962,"sh":0.152376},{"b":"CalDigit","s":10320169,"sh":0.103138},{"b":"Koncept","s":5119624,"sh":0.051165},{"b":"Lenovo","s":4877099,"sh":0.048741},{"b":"Microsoft","s":3147743,"sh":0.031458},{"b":"HP","s":2907752,"sh":0.02906},{"b":"Wavlink","s":2522775,"sh":0.025212},{"b":"UGREEN","s":2332594,"sh":0.023312}],"CA":[{"b":"Dell","s":923822,"sh":0.174984},{"b":"Plugable","s":862978,"sh":0.163459},{"b":"Lenovo","s":829731,"sh":0.157162},{"b":"Anker","s":675294,"sh":0.127909},{"b":"CalDigit","s":361664,"sh":0.068504},{"b":"UGREEN","s":273043,"sh":0.051718},{"b":"StarTech","s":238625,"sh":0.045199},{"b":"ITSPWR","s":201590,"sh":0.038184},{"b":"Wavlink","s":152975,"sh":0.028975},{"b":"HP","s":111028,"sh":0.02103}],"UK":[{"b":"Dell","s":1450785,"sh":0.208056},{"b":"Anker","s":736603,"sh":0.105636},{"b":"CalDigit","s":725104,"sh":0.103987},{"b":"HP","s":682833,"sh":0.097925},{"b":"UGREEN","s":609996,"sh":0.087479},{"b":"Wavlink","s":585934,"sh":0.084028},{"b":"Lenovo","s":362769,"sh":0.052024},{"b":"StarTech","s":344678,"sh":0.04943},{"b":"Microsoft","s":291354,"sh":0.041783},{"b":"Belkin","s":143448,"sh":0.020572}],"DE":[{"b":"Lenovo","s":2873527,"sh":0.213253},{"b":"UGREEN","s":1960393,"sh":0.145487},{"b":"Dell","s":1167689,"sh":0.086658},{"b":"Anker","s":1075740,"sh":0.079834},{"b":"HP","s":932200,"sh":0.069181},{"b":"Wavlink","s":710047,"sh":0.052695},{"b":"CalDigit","s":662202,"sh":0.049144},{"b":"Microsoft","s":514948,"sh":0.038216},{"b":"ivanky","s":486814,"sh":0.036128},{"b":"I-Tec","s":330132,"sh":0.0245}],"FR":[{"b":"Dell","s":196025,"sh":0.137324},{"b":"HP","s":185600,"sh":0.130021},{"b":"Wavlink","s":171511,"sh":0.120151},{"b":"Belkin","s":150854,"sh":0.10568},{"b":"UGREEN","s":144405,"sh":0.101161},{"b":"Lenovo","s":85165,"sh":0.059661},{"b":"Razer","s":65917,"sh":0.046178},{"b":"CalDigit","s":63088,"sh":0.044196},{"b":"ivanky","s":41334,"sh":0.028956},{"b":"StarTech","s":37613,"sh":0.02635}],"ES":[{"b":"HP","s":296414,"sh":0.260958},{"b":"UGREEN","s":165970,"sh":0.146117},{"b":"Lenovo","s":149004,"sh":0.13118},{"b":"Wavlink","s":101131,"sh":0.089034},{"b":"Dell","s":58113,"sh":0.051161},{"b":"CalDigit","s":57936,"sh":0.051006},{"b":"StarTech","s":42745,"sh":0.037632},{"b":"Baseus","s":42693,"sh":0.037586},{"b":"Belkin","s":40195,"sh":0.035387},{"b":"Microsoft","s":35911,"sh":0.031615}],"IT":[{"b":"Lenovo","s":145626,"sh":0.178142},{"b":"HP","s":128716,"sh":0.157457},{"b":"Wavlink","s":96291,"sh":0.117791},{"b":"Dell","s":77463,"sh":0.094759},{"b":"UGREEN","s":72317,"sh":0.088464},{"b":"Belkin","s":38090,"sh":0.046595},{"b":"CalDigit","s":30150,"sh":0.036882},{"b":"StarTech","s":26821,"sh":0.03281},{"b":"APC","s":24018,"sh":0.029381},{"b":"Baseus","s":22296,"sh":0.027275}],"NL":[{"b":"UGREEN","s":97547,"sh":0.17721},{"b":"CalDigit","s":62354,"sh":0.113276},{"b":"Dell","s":51157,"sh":0.092935},{"b":"Lenovo","s":36905,"sh":0.067044},{"b":"Anker","s":34460,"sh":0.062602},{"b":"OWC","s":29488,"sh":0.05357},{"b":"Satechi","s":26204,"sh":0.047605},{"b":"ivanky","s":25546,"sh":0.046409},{"b":"v AV Access","s":21570,"sh":0.039186},{"b":"Belkin","s":17348,"sh":0.031515}]},"asus":[{"mk":"DE","sku":"B0FS9D2PKS","title":"ASUS ROG Bulwark Dock DG300","sub":"dock","s":33118,"u":224,"ly":0,"wks":29,"fw":5,"lw":35},{"mk":"DE","sku":"B09DVN9NCM","title":"Asus - Dock Station Simpro Dock 2","sub":"dock","s":18579,"u":138,"ly":12438,"wks":29,"fw":1,"lw":35},{"mk":"US","sku":"B0DHYL2BCX","title":"Asus DC300 Docking Station - for Mouse, Keyboard, Monitor, Notebook - Charging Capability ","sub":"dock","s":18488,"u":58,"ly":5455,"wks":31,"fw":1,"lw":35},{"mk":"ES","sku":"B0FS9D2PKS","title":"ROG BULLWARK Dock / DG300, Estaci\u00f3n de Acoplamiento 7 en 1, HDMI 2.1 8K/4K, 3 USB-A 10Gbps","sub":"dock","s":18130,"u":158,"ly":0,"wks":28,"fw":5,"lw":35},{"mk":"CA","sku":"B0DHYKHCRJ","title":"ASUS Triple 4K Thunderbolt 4 Dock DC500: Black, Thunderbolt 4, Ethernet, HDMI, Compatible ","sub":"dock","s":13536,"u":28,"ly":480,"wks":8,"fw":1,"lw":11},{"mk":"FR","sku":"B09DVN9NCM","title":"ASUS - Dock Station Simpro Dock 2","sub":"dock","s":9587,"u":62,"ly":7550,"wks":30,"fw":3,"lw":35},{"mk":"FR","sku":"B0CN5KK557","title":"Asus - Station d'accueil USB-C Triple \u00e9cran DC300","sub":"dock","s":9455,"u":56,"ly":15851,"wks":28,"fw":1,"lw":35},{"mk":"CA","sku":"B0DHYL2BCX","title":"ASUS Triple Display USB-C Dock DC300","sub":"dock","s":7747,"u":31,"ly":4503,"wks":7,"fw":1,"lw":8},{"mk":"DE","sku":"B0CN5KK557","title":"Asus - Station d'accueil USB-C Triple \u00e9cran DC300","sub":"dock","s":7483,"u":45,"ly":29913,"wks":21,"fw":1,"lw":34},{"mk":"US","sku":"B0DHYKHCRJ","title":"ASUS Triple 4K THUNDERBOLT4 Dock DC500","sub":"dock","s":7093,"u":14,"ly":3716,"wks":12,"fw":4,"lw":33},{"mk":"DE","sku":"B0BRY25BWR","title":"ASUS Acc DC500 Triple 4K TBT4 Dock/EU","sub":"dock","s":6088,"u":21,"ly":19474,"wks":15,"fw":2,"lw":32},{"mk":"NL","sku":"B0FS9D2PKS","title":"ROG BullWARK Dock / DG300, 7-in-1 Dockingstation, HDMI 2.1 8K/4K, 3 USB-A 10 Gbit/s, USB-C","sub":"dock","s":5344,"u":36,"ly":0,"wks":19,"fw":5,"lw":32},{"mk":"FR","sku":"B0FNWN6MZ2","title":"Asus UsB-C Stand Dock Dc310 (90xb099N-Bds020)","sub":"dock","s":4997,"u":29,"ly":0,"wks":18,"fw":4,"lw":34},{"mk":"UK","sku":"B09DVN9NCM","title":"Asus - Dock Station Simpro Dock 2","sub":"dock","s":3389,"u":20,"ly":0,"wks":11,"fw":17,"lw":35},{"mk":"CA","sku":"B0CCYCQ5LD","title":"ASUS USB-C Mini Dock DC100","sub":"dock","s":3330,"u":37,"ly":810,"wks":17,"fw":1,"lw":33},{"mk":"DE","sku":"B0D66XZ2F8","title":"Asus - Station d'accueil DUAL 4K USB-C DC201","sub":"hub","s":2924,"u":38,"ly":2445,"wks":16,"fw":1,"lw":35},{"mk":"IT","sku":"B09DVN9NCM","title":"ASUS SimPro Dock 2 Thunderbolt 3 Dockingstation Schwarz-Blau","sub":"dock","s":2905,"u":19,"ly":2255,"wks":10,"fw":3,"lw":34},{"mk":"FR","sku":"B0FT3KNR1L","title":"Asus - Dock USB-C Triple Display Dock Duo DC301","sub":"dock","s":2874,"u":14,"ly":0,"wks":11,"fw":12,"lw":35},{"mk":"FR","sku":"B0FS9D2PKS","title":"Asus Dg300 Rog Castra Dock Ww 10 St?ck (90xb0a4N-Bds000)","sub":"dock","s":2569,"u":17,"ly":0,"wks":12,"fw":17,"lw":35},{"mk":"FR","sku":"B0D66XZ2F8","title":"Asus - Station d'accueil Dual 4K USB-C DC201","sub":"hub","s":2399,"u":28,"ly":320,"wks":18,"fw":1,"lw":33},{"mk":"DE","sku":"B0FH2QDM4W","title":"Asus - Docking Station ASUS Master Thunderbolt 5 DC510","sub":"dock","s":2354,"u":7,"ly":805,"wks":5,"fw":30,"lw":35},{"mk":"DE","sku":"B0FNWN6MZ2","title":"Asus - Station d'accueil USB-C DC310 Stand Dock 10-en-1","sub":"dock","s":2224,"u":13,"ly":0,"wks":11,"fw":1,"lw":25},{"mk":"ES","sku":"B09DVN9NCM","title":"Asus - Dock Station Simpro Dock 2","sub":"dock","s":1901,"u":13,"ly":1520,"wks":10,"fw":2,"lw":34},{"mk":"FR","sku":"B0BRY25BWR","title":"ASUS Triple 4K Thunderbolt 4 Dock DC500 Cablato Nero (Triple 4K Thunderbolt 4 Dock - Dc500","sub":"dock","s":1738,"u":6,"ly":4939,"wks":6,"fw":1,"lw":34},{"mk":"FR","sku":"B0FH2QDM4W","title":"Asus Dc510 Tbt5 Dock/eu (90xb09nN-Bds010)","sub":"dock","s":1708,"u":5,"ly":0,"wks":4,"fw":15,"lw":28},{"mk":"FR","sku":"B0FT3MKGKC","title":"Asus - Dock ROG Bulwark DG300 (2025) Noir","sub":"dock","s":1672,"u":8,"ly":0,"wks":8,"fw":9,"lw":31},{"mk":"DE","sku":"B0FT3KNR1L","title":"Asus - Docking Station USB-C a triplo schermo DC301","sub":"dock","s":1531,"u":8,"ly":0,"wks":8,"fw":2,"lw":35},{"mk":"NL","sku":"B0FH2QDM4W","title":"ASUS Master Thunderbolt 5 Dock DC510 - Kabelgebunden - Thunderbolt 5-140W","sub":"dock","s":1432,"u":4,"ly":0,"wks":4,"fw":10,"lw":33},{"mk":"ES","sku":"B0D66XZ2F8","title":"Hub USB-C ASUS DC201 Negro","sub":"hub","s":1421,"u":16,"ly":239,"wks":13,"fw":3,"lw":23},{"mk":"US","sku":"B0FS9D2PKS","title":"ASUS Dg300 Rog Castra Dock WW 10 St?ck (90XB0A4N-BDS000)","sub":"dock","s":1101,"u":4,"ly":0,"wks":4,"fw":15,"lw":28},{"mk":"IT","sku":"B0CN5KK557","title":"Asus - Station d'accueil USB-C triple \u00e9cran DC300","sub":"dock","s":1100,"u":6,"ly":3739,"wks":3,"fw":1,"lw":27},{"mk":"UK","sku":"B0FT3MKGKC","title":"Asus - Dock ROG Bulwark DG300 (2025) noir","sub":"dock","s":1092,"u":6,"ly":0,"wks":3,"fw":4,"lw":7},{"mk":"US","sku":"B0DRDHW5FN","title":"ASUS Triple Display USB-C Dock DC300 Docking Station with 8 Connections, USB-C, USB-A, HDM","sub":"dock","s":986,"u":4,"ly":66724,"wks":4,"fw":1,"lw":35},{"mk":"IT","sku":"B0F3GVSCSB","title":"Asus Rog 140w UsB-C Ladeger?t Gan Universal Schwarz Ac Schnellladung Drinnen","sub":"dock","s":963,"u":8,"ly":0,"wks":3,"fw":28,"lw":34},{"mk":"IT","sku":"B0FS9D2PKS","title":"Asus Dg300 Rog Castra Dock Ww 10 St?ck (90xb0a4N-Bds000)","sub":"dock","s":953,"u":6,"ly":0,"wks":3,"fw":18,"lw":34},{"mk":"ES","sku":"B0CN5KK557","title":"Asus Docking Triple Display Dc300 UsB-C 150w (90xb08cN-Bds090)","sub":"dock","s":882,"u":5,"ly":4380,"wks":3,"fw":5,"lw":17},{"mk":"FR","sku":"B08296YG9F","title":"ASUS - OS200 Station d'accueil USB C Grise pour PC Portable","sub":"dock","s":869,"u":11,"ly":4898,"wks":6,"fw":2,"lw":8},{"mk":"FR","sku":"B0CS394H7J","title":"Asus - Station d'accueil Triple 4K Thunderbolt DC500","sub":"dock","s":698,"u":2,"ly":0,"wks":2,"fw":21,"lw":23},{"mk":"US","sku":"B0FT3KNR1L","title":"ASUS DC301 - Docking Station - USB-C - HDMI, DP, USB-C","sub":"dock","s":549,"u":1,"ly":0,"wks":1,"fw":9,"lw":9},{"mk":"UK","sku":"B0D66XZ2F8","title":"Asus - Station d'accueil DUAL 4K USB-C DC201","sub":"hub","s":370,"u":4,"ly":222,"wks":3,"fw":7,"lw":24},{"mk":"DE","sku":"B0CS394H7J","title":"Asus - Dock Thunderbolt Triple 4K DC500","sub":"dock","s":349,"u":1,"ly":0,"wks":1,"fw":18,"lw":18},{"mk":"UK","sku":"B0CS394H7J","title":"Asus Triple 4K Thunderbolt DC500 Docking Station","sub":"dock","s":346,"u":1,"ly":0,"wks":1,"fw":5,"lw":5},{"mk":"UK","sku":"B0G53F2JM7","title":"Asus - ASUS ROG 100W Chargeur Dock - Hub et chargeur Gaming","sub":"dock","s":337,"u":3,"ly":0,"wks":3,"fw":4,"lw":23},{"mk":"ES","sku":"B0BRY25BWR","title":"Asus Dc500 - Dockingstation - Thunderbolt 4 - 2 X Hdmi, Thunderbolt 4 - 2,5gbe - 150 Watt ","sub":"dock","s":290,"u":1,"ly":318,"wks":1,"fw":7,"lw":7},{"mk":"DE","sku":"B0G53F2JM7","title":"ASUS - ROG 100W Chargeur Dock - Hub et chargeur Gaming","sub":"dock","s":265,"u":2,"ly":0,"wks":2,"fw":3,"lw":20},{"mk":"NL","sku":"B081758CWC","title":"ASUS USB-N10 Nano, Wi-Fi N150 Mbps","sub":"hub","s":242,"u":32,"ly":39,"wks":13,"fw":1,"lw":26},{"mk":"FR","sku":"B0H99NRJRH","title":"Asus - Station d'accueil ASUS 8-en-1 USB-C Dock DC210","sub":"dock","s":236,"u":4,"ly":0,"wks":3,"fw":33,"lw":35},{"mk":"FR","sku":"B0C4FQ5SHG","title":"Asus - Mini Station d'accueil USB-C pour Zenbook","sub":"dock","s":235,"u":4,"ly":370,"wks":4,"fw":4,"lw":18},{"mk":"US","sku":"B0FRMDPR42","title":"ASUS ROG Bulwark Dock DG300","sub":"dock","s":210,"u":1,"ly":0,"wks":1,"fw":29,"lw":29},{"mk":"CA","sku":"B0FRMDPR42","title":"ASUS DS300 ROG 7-in-1 Bulwark Dock","sub":"dock","s":200,"u":1,"ly":0,"wks":1,"fw":35,"lw":35},{"mk":"ES","sku":"B0FNWN6MZ2","title":"Asus UsB-C Stand Dock Dc310 (90xb099N-Bds020)","sub":"dock","s":166,"u":1,"ly":0,"wks":1,"fw":21,"lw":21},{"mk":"NL","sku":"B0FT3KNR1L","title":"Asus - Dock USB-C Triple Display Dock Duo DC301","sub":"dock","s":153,"u":1,"ly":0,"wks":1,"fw":32,"lw":32},{"mk":"CA","sku":"B0C4FQ5SHG","title":"Asus USB-C Mini Dock Wired USB 3.2 Gen 2 (3.1 Gen 2) Type-C, W128563213 (Gen 2 (3.1 Gen 2)","sub":"dock","s":119,"u":1,"ly":168,"wks":1,"fw":28,"lw":28},{"mk":"IT","sku":"B0777RPH35","title":"ASUS USB3.0_HZ-3B Docking station universale per laptop, nero","sub":"dock","s":88,"u":2,"ly":0,"wks":1,"fw":32,"lw":32},{"mk":"US","sku":"B076PPZN7S","title":"ASUS All-in-One Mini Docking Station, 4K HDMI 1.4, USB A, Power Delivery, ASUS Mini Dock","sub":"dock","s":88,"u":1,"ly":0,"wks":1,"fw":35,"lw":35},{"mk":"NL","sku":"B0DWFW2TQW","title":"NUC/LAN en USB NUCIOALUWS Toevoegen On","sub":"hub","s":69,"u":2,"ly":0,"wks":1,"fw":6,"lw":6},{"mk":"FR","sku":"B0H953T8HL","title":"Asus - Station d'accueil ASUS 4-en-1 USB-C Dock DC110","sub":"dock","s":49,"u":1,"ly":0,"wks":1,"fw":31,"lw":31},{"mk":"NL","sku":"B0C4FQ5SHG","title":"Asus Usb-C Mini Dock Wired Usb 3.2 Gen 2 (3.1 Gen 2) Type-C, 90XB0820-BDS000","sub":"dock","s":48,"u":1,"ly":0,"wks":1,"fw":33,"lw":33},{"mk":"UK","sku":"B0C4FQ5SHG","title":"Asus - Mini station d'accueil USB-C pour Zenbook","sub":"dock","s":47,"u":1,"ly":548,"wks":1,"fw":11,"lw":11},{"mk":"DE","sku":"B0DWFW2TQW","title":"NUC/LAN and USB NUCIOALUWS Add On","sub":"dock","s":39,"u":1,"ly":0,"wks":1,"fw":24,"lw":24},{"mk":"IT","sku":"B07CR1QWH2","title":"ASUS 0A001-00692500 Adattatore Originale per Computer Portatile","sub":"dock","s":37,"u":1,"ly":0,"wks":1,"fw":34,"lw":34},{"mk":"DE","sku":"B0C4FQ5SHG","title":"Asus - Mini Station d'accueil USB-C Pour Zenbook","sub":"dock","s":27,"u":1,"ly":964,"wks":1,"fw":35,"lw":35},{"mk":"FR","sku":"B077CTQW9T","title":"","sub":"hub","s":0,"u":0,"ly":8529,"wks":0,"fw":null,"lw":null},{"mk":"FR","sku":"B084PYJF77","title":"","sub":"hub","s":0,"u":0,"ly":1264,"wks":0,"fw":null,"lw":null},{"mk":"CA","sku":"B09DVN9NCM","title":"","sub":"hub","s":0,"u":0,"ly":1295,"wks":0,"fw":null,"lw":null},{"mk":"DE","sku":"B077CTQW9T","title":"","sub":"hub","s":0,"u":0,"ly":3657,"wks":0,"fw":null,"lw":null},{"mk":"DE","sku":"B084PYJF77","title":"","sub":"hub","s":0,"u":0,"ly":902,"wks":0,"fw":null,"lw":null},{"mk":"FR","sku":"B07H5W14XQ","title":"","sub":"hub","s":0,"u":0,"ly":2230,"wks":0,"fw":null,"lw":null},{"mk":"ES","sku":"B07H5W14XQ","title":"","sub":"hub","s":0,"u":0,"ly":1770,"wks":0,"fw":null,"lw":null},{"mk":"ES","sku":"B08296YG9F","title":"","sub":"hub","s":0,"u":0,"ly":1027,"wks":0,"fw":null,"lw":null},{"mk":"IT","sku":"B077CTQW9T","title":"","sub":"hub","s":0,"u":0,"ly":851,"wks":0,"fw":null,"lw":null},{"mk":"IT","sku":"B06XHDS84T","title":"","sub":"hub","s":0,"u":0,"ly":796,"wks":0,"fw":null,"lw":null},{"mk":"ES","sku":"B077CTQW9T","title":"","sub":"hub","s":0,"u":0,"ly":3006,"wks":0,"fw":null,"lw":null},{"mk":"NL","sku":"B0CN5KK557","title":"","sub":"hub","s":0,"u":0,"ly":1005,"wks":0,"fw":null,"lw":null},{"mk":"UK","sku":"B0FH2QDM4W","title":"","sub":"hub","s":0,"u":0,"ly":3988,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B00TKFDEI6","title":"","sub":"hub","s":0,"u":0,"ly":1921,"wks":0,"fw":null,"lw":null},{"mk":"UK","sku":"B077CTQW9T","title":"","sub":"hub","s":0,"u":0,"ly":964,"wks":0,"fw":null,"lw":null},{"mk":"UK","sku":"B0CN5KK557","title":"","sub":"hub","s":0,"u":0,"ly":1447,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0777RPH35","title":"","sub":"hub","s":0,"u":0,"ly":740,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0DJFPGN9G","title":"","sub":"hub","s":0,"u":0,"ly":1387,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0D66XZ2F8","title":"","sub":"hub","s":0,"u":0,"ly":708,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0F6DB5BFN","title":"","sub":"hub","s":0,"u":0,"ly":3609,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0DRDPVVCL","title":"","sub":"hub","s":0,"u":0,"ly":28536,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0DRDJX1SR","title":"","sub":"hub","s":0,"u":0,"ly":51257,"wks":0,"fw":null,"lw":null},{"mk":"US","sku":"B0FBGVG4MK","title":"","sub":"hub","s":0,"u":0,"ly":12817,"wks":0,"fw":null,"lw":null}],"dead":[{"mk":"US","sku":"B0DRDHW5FN","title":"ASUS Triple Display USB-C Dock DC300 Docking Station with 8 Connections, USB-C, USB-A, HDM","ly":66724,"s":986},{"mk":"US","sku":"B0DRDJX1SR","title":"ASUS Dual 4K USB-C 5-in-1 Docking Station DC201 with USB-C, USB-A, HDMI, DP for Business, ","ly":51257,"s":0},{"mk":"US","sku":"B0DRDPVVCL","title":"ASUS SimPro Dock 2 One-Stop Connection Docking Station, USB-C, HDMI, DP, VGA for Business,","ly":28536,"s":0},{"mk":"US","sku":"B0FBGVG4MK","title":"ASUS Triple Display USB-C Dock DC300 Docking Station, USB-C, USB-A, HDMI, DP, LED Indicato","ly":12817,"s":0},{"mk":"FR","sku":"B077CTQW9T","title":"Asus - Station d'accueil USB 3.0 (HZ-3B) pour PC Portable","ly":8529,"s":0},{"mk":"FR","sku":"B08296YG9F","title":"ASUS - OS200 Station d'accueil USB C Grise pour PC Portable","ly":4898,"s":869},{"mk":"ES","sku":"B0CN5KK557","title":"Asus Docking Triple Display Dc300 UsB-C 150w (90xb08cN-Bds090)","ly":4380,"s":882},{"mk":"UK","sku":"B0FH2QDM4W","title":"ASUS Master Thunderbolt 5 Dock DC510 - 13-in-1 Docking Station - 3 8K Displays, 140W PD, M","ly":3988,"s":0},{"mk":"DE","sku":"B077CTQW9T","title":"Asus - USB 3.0 Dock Station HZ-3B Versione HZ-3B","ly":3657,"s":0},{"mk":"US","sku":"B0F6DB5BFN","title":"ASUS Dual 4K USB-C Docking Sation DC201, USB-C, USB-A, HDMI, DP for Business, Gaming, Stor","ly":3609,"s":0},{"mk":"ES","sku":"B077CTQW9T","title":"Asus - Estaci\u00f3n de Acoplamiento USB 3.0 Versi\u00f3n HZ-3B","ly":3006,"s":0},{"mk":"FR","sku":"B07H5W14XQ","title":"ASUS USB 3.0 HZ-3A Ultra Dock","ly":2230,"s":0},{"mk":"US","sku":"B00TKFDEI6","title":"ASUS USB 3.0 Universal Laptop Docking Station (ASUS USB 3.0 Laptop Docking Station)","ly":1921,"s":0},{"mk":"ES","sku":"B07H5W14XQ","title":"ASUS Docking Station HZ-3A Plus USB 3.0","ly":1770,"s":0},{"mk":"UK","sku":"B0CN5KK557","title":"ASUS Dock DC300","ly":1447,"s":0},{"mk":"US","sku":"B0DJFPGN9G","title":"Asus DC500 Dock","ly":1387,"s":0},{"mk":"CA","sku":"B09DVN9NCM","title":"Asus  SimPro Dock 2  Docking Station  Ethernet LAN (RJ-45) Ports 1  VGA (D-Sub) Ports Quan","ly":1295,"s":0},{"mk":"FR","sku":"B084PYJF77","title":"ASUS OS200 Station d'accueil USB-C VGA, HDMI GigE","ly":1264,"s":0},{"mk":"ES","sku":"B08296YG9F","title":"ASUS - OS200 Station d'accueil USB C Grise pour PC Portable","ly":1027,"s":0},{"mk":"NL","sku":"B0CN5KK557","title":"ASUS DC300 docking station","ly":1005,"s":0},{"mk":"UK","sku":"B077CTQW9T","title":"Asus - USB 3.0 Dock Station HZ-3B Version","ly":964,"s":0},{"mk":"DE","sku":"B0C4FQ5SHG","title":"Asus - Mini Station d'accueil USB-C Pour Zenbook","ly":964,"s":27},{"mk":"DE","sku":"B084PYJF77","title":"ASUS OS200 Dockingstation USB-C VGA, HDMI GigE","ly":902,"s":0},{"mk":"IT","sku":"B077CTQW9T","title":"Asus - Estaci\u00f3n de acoplamiento USB 3.0 Versi\u00f3n HZ-3B","ly":851,"s":0},{"mk":"IT","sku":"B06XHDS84T","title":"Asus SimPro Dock Black - Notebook docks & Port replicators (Cable, 10,100,1000 Mbit/s, SD,","ly":796,"s":0},{"mk":"US","sku":"B0777RPH35","title":"ASUS USB3.0_HZ-3B Docking Universal Laptop Docking Station, Black","ly":740,"s":0},{"mk":"US","sku":"B0D66XZ2F8","title":"Asus USB-C Hub DC201 Black","ly":708,"s":0},{"mk":"UK","sku":"B0C4FQ5SHG","title":"Asus - Mini station d'accueil USB-C pour Zenbook","ly":548,"s":47}],"roll":[{"cc":"US","first":15,"wks":5,"s":1310,"u":5},{"cc":"CA","first":35,"wks":1,"s":200,"u":1},{"cc":"UK","first":4,"wks":3,"s":1092,"u":6},{"cc":"DE","first":5,"wks":29,"s":33118,"u":224},{"cc":"FR","first":1,"wks":33,"s":11252,"u":315},{"cc":"ES","first":5,"wks":28,"s":18130,"u":158},{"cc":"IT","first":18,"wks":3,"s":953,"u":6},{"cc":"NL","first":5,"wks":19,"s":5344,"u":36}],"weekly":[{"wk":1,"cy":6742918,"ly":0},{"wk":2,"cy":6534023,"ly":6188595},{"wk":3,"cy":6421085,"ly":6022469},{"wk":4,"cy":6522767,"ly":5799740},{"wk":5,"cy":6908998,"ly":5876046},{"wk":6,"cy":6504476,"ly":6217464},{"wk":7,"cy":6145970,"ly":5625444},{"wk":8,"cy":6478286,"ly":5873989},{"wk":9,"cy":6329099,"ly":5805508},{"wk":10,"cy":6755408,"ly":5752306},{"wk":11,"cy":6606015,"ly":5714894},{"wk":12,"cy":6477497,"ly":5607612},{"wk":13,"cy":6433834,"ly":5774232},{"wk":14,"cy":5976849,"ly":5683900},{"wk":15,"cy":6270958,"ly":5300889},{"wk":16,"cy":6696494,"ly":4824446},{"wk":17,"cy":6480285,"ly":5163376},{"wk":18,"cy":6260049,"ly":5404073},{"wk":19,"cy":6243174,"ly":5668564},{"wk":20,"cy":6408478,"ly":5871893},{"wk":21,"cy":5827604,"ly":5781530},{"wk":22,"cy":5982887,"ly":5412515},{"wk":23,"cy":6026701,"ly":6169549},{"wk":24,"cy":5663493,"ly":5455820},{"wk":25,"cy":8557461,"ly":5506240},{"wk":26,"cy":5775964,"ly":5527922},{"wk":27,"cy":6156940,"ly":5549036},{"wk":28,"cy":5996923,"ly":10201565},{"wk":29,"cy":6004053,"ly":5239484},{"wk":30,"cy":6199498,"ly":5680940},{"wk":31,"cy":6359715,"ly":5965605},{"wk":32,"cy":6388634,"ly":6044980},{"wk":33,"cy":6564882,"ly":5974203},{"wk":34,"cy":6921464,"ly":6170084},{"wk":35,"cy":6812201,"ly":6338324}]};
+const MK = D.markets, BR = D.brands;
+const FX = Object.fromEntries(MK.map(m=>[m.cc,m.fx]));
+const CCS = MK.map(m=>m.cc);
+let focus=null, sortKey='rev', sortDir=-1, query='';
+
+const L=(en,zh,b)=>`<span class="en${b?' b':''}">${en}</span><span class="zh${b?' b':''}">${zh}</span>`;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=v=>v>=1e9?'$'+(v/1e9).toFixed(2)+'bn':v>=1e6?'$'+(v/1e6).toFixed(1)+'m'
+  :v>=1e3?'$'+(v/1e3).toFixed(0)+'k':'$'+Math.round(v);
+const pct=(v,d=1)=>v==null?'—':(v*100).toFixed(d)+'%';
+const sgn=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
+const M=cc=>MK.find(m=>m.cc===cc);
+const scope=()=>focus?[M(focus)]:MK;
+const dockUSD=()=>scope().reduce((a,m)=>a+m.dock*m.fx,0);
+const dockLYUSD=()=>scope().reduce((a,m)=>a+m.dockLY*m.fx,0);
+
+function rows(){
+  const cols=scope(), tot=dockUSD();
+  return Object.keys(BR).map(b=>{
+    let rev=0,ly=0,u=0,n=0;
+    for(const m of cols){ const e=BR[b][m.cc]; if(e){ rev+=e.s*m.fx; ly+=(e.ly||0)*m.fx; u+=e.u; n++; } }
+    return {b,rev,ly,u,n,share:tot?rev/tot:0,asp:u?rev/u:null,
+            yoy:ly>0?rev/ly-1:null,
+            nAll:CCS.filter(c=>BR[b][c]).length};
+  }).filter(r=>r.rev>0);
+}
+const HEAT=['--h0','--h1','--h2','--h3','--h4','--h5'];
+function heat(s){ if(s==null)return null; const p=s*100;
+  const i=p<1?0:p<2.5?1:p<5?2:p<9?3:p<15?4:5; return {bg:`var(${HEAT[i]})`,dark:i>=4}; }
+
+function band(){
+  const tot=dockUSD(), ly=dockLYUSD();
+  const cols=scope();
+  const au=cols.reduce((a,m)=>a+m.asus*m.fx,0), aly=cols.reduce((a,m)=>a+m.asusLY*m.fx,0);
+  const un=cols.reduce((a,m)=>a+m.dockU,0);
+  const where=focus?[M(focus).name,M(focus).zh]:['all eight markets','八個市場合計'];
+  const yy=tot/ly-1, ay=aly?au/aly-1:0;
+  const cards=[
+    [money(tot),L('Dock revenue, '+esc(where[0]),'Dock 營收（'+where[1]+'）',1),''],
+    [`<span class="${yy>=0?'up':'dn'}">${sgn(yy)}</span>`,L('Year on year','年增率',1),''],
+    ['$'+Math.round(tot/un),L('Average dock selling price','Dock 平均售價',1),''],
+    [pct(au/tot,3),L('ASUS share of dock revenue','ASUS 佔 Dock 營收',1),'flag'],
+    [`<span class="${ay>=0?'up':'dn'}">${sgn(ay)}</span>`,L('ASUS year on year','ASUS 年增率',1),'flag']
+  ];
+  document.getElementById('band').innerHTML=cards.map(([v,l,c])=>
+    `<div class="stat ${c}"><b>${v}</b><span class="lab">${l}</span></div>`).join('');
+  document.getElementById('masttag').innerHTML=
+    L('2026 weeks 1–35 against the same weeks of 2025 — 8 markets, ASIN-level, US dollars',
+      '2026 年第 1 至 35 週對比 2025 年同週｜8 個市場、ASIN 層級、美元計價',1);
+}
+
+function strip(){
+  const mx=Math.max(...MK.map(m=>m.dock*m.fx));
+  document.getElementById('strip').innerHTML=MK.map(m=>{
+    const usd=m.dock*m.fx, yy=m.dock/m.dockLY-1, dk=m.dock/(m.dock+m.hub);
+    return `<button class="mk" data-cc="${m.cc}" aria-pressed="${focus===m.cc}">
+      <span class="cc"><i>${m.cc}</i><span class="en">${esc(m.name)}</span><span class="zh">${m.zh}</span></span>
+      <span class="v">${money(usd)}</span>
+      <span class="yy ${yy>=0?'up':'dn'}">${sgn(yy)} ${L('YoY','年增')}</span>
+      <span class="mix"><i style="width:${(dk*100).toFixed(0)}%;background:var(--h4)"></i><i style="width:${((1-dk)*100).toFixed(0)}%;background:var(--h1)"></i></span>
+      <span class="mixlab">${(dk*100).toFixed(0)}% dock · ${((1-dk)*100).toFixed(0)}% hub</span>
+    </button>`;
+  }).join('');
+  document.querySelectorAll('.mk').forEach(el=>el.onclick=()=>{
+    focus=focus===el.dataset.cc?null:el.dataset.cc;
+    sortKey=focus||'rev'; sortDir=-1; render();
+  });
+  document.getElementById('striph').innerHTML=focus
+    ? L('Eight markets — '+M(focus).name+' selected','八個市場 ── 已選取'+M(focus).zh,1)
+    : L('Eight markets','八個市場',1);
+}
+
+function matrix(){
+  const ar=k=>sortKey===k?`<span class="ind">${sortDir<0?'▼':'▲'}</span>`:'';
+  document.getElementById('mxh').innerHTML=
+    `<th data-k="brand" style="text-align:left"><span class="hd">${L('Brand','品牌',1)}</span>${ar('brand')}</th>`+
+    MK.map(m=>`<th data-k="${m.cc}" title="${esc(m.name)} ${m.zh}">${m.cc} ${ar(m.cc)}</th>`).join('')+
+    `<th data-k="share"><span class="hd">${L('Share of docks','Dock 市佔',1)}</span>${ar('share')}</th>`+
+    `<th data-k="rev"><span class="hd">${L('Revenue','營收',1)}</span>${ar('rev')}</th>`+
+    `<th data-k="asp"><span class="hd">${L('Avg price','平均售價',1)}</span>${ar('asp')}</th>`+
+    `<th data-k="yoy"><span class="hd">${L('Year on year','年增率',1)}</span>${ar('yoy')}</th>`+
+    `<th data-k="n"><span class="hd">${L('Markets','市場數',1)}</span>${ar('n')}</th>`;
+  let rs=rows();
+  rs.sort((a,b)=>{
+    if(sortKey==='brand')return a.b.localeCompare(b.b)*(sortDir<0?-1:1);
+    let va,vb;
+    if(sortKey==='share'){va=a.share;vb=b.share;}
+    else if(sortKey==='rev'){va=a.rev;vb=b.rev;}
+    else if(sortKey==='asp'){va=a.asp??-1;vb=b.asp??-1;}
+    else if(sortKey==='yoy'){va=a.yoy??-99;vb=b.yoy??-99;}
+    else if(sortKey==='n'){va=a.nAll;vb=b.nAll;}
+    else {const ea=BR[a.b][sortKey],eb=BR[b.b][sortKey];va=ea?ea.sh:-1;vb=eb?eb.sh:-1;}
+    return (va-vb)*(sortDir<0?-1:1);
+  });
+  const q=query.trim().toLowerCase(), hit=r=>!q||r.b.toLowerCase().includes(q);
+  document.getElementById('qhint').innerHTML=q
+    ?L(rs.filter(hit).length+' of '+rs.length+' brands match','符合 '+rs.filter(hit).length+' ／ '+rs.length+' 個品牌')
+    :L(rs.length+' brands','共 '+rs.length+' 個品牌');
+  document.getElementById('mxb').innerHTML=rs.map(r=>{
+    const cells=MK.map(m=>{
+      const e=BR[r.b][m.cc];
+      if(!e)return `<td><span class="cell n">—</span></td>`;
+      const h=heat(e.sh);
+      return `<td style="background:${h.bg}"><span class="cell${h.dark?' d':''}">${(e.sh*100).toFixed(1)}</span></td>`;
+    }).join('');
+    const me=/asus/i.test(r.b)?' me':'';
+    return `<tr class="${q&&!hit(r)?'dim':''}${me}"><th>${esc(r.b)}</th>${cells}
+      <td><span class="num">${pct(r.share,2)}</span></td>
+      <td><span class="num">${money(r.rev)}</span></td>
+      <td><span class="num mut">${r.asp?'$'+Math.round(r.asp):'—'}</span></td>
+      <td><span class="num ${r.yoy==null?'mut':r.yoy>=0?'up':'dn'}">${r.yoy==null?'—':sgn(r.yoy)}</span></td>
+      <td><span class="num mut">${r.nAll}</span></td></tr>`;
+  }).join('');
+  const tot=dockUSD(), shown=rs.reduce((a,r)=>a+r.rev,0);
+  document.getElementById('mxf').innerHTML=
+    `<tr><th>${L('All other brands','其餘所有品牌')}</th>`+
+    MK.map(m=>{const s=Object.keys(BR).reduce((a,b)=>a+(BR[b][m.cc]?BR[b][m.cc].s:0),0);
+      return `<td><span class="cell">${((1-s/m.dock)*100).toFixed(1)}</span></td>`;}).join('')+
+    `<td><span class="num">${pct(1-shown/tot,2)}</span></td>
+     <td><span class="num">${money(tot-shown)}</span></td><td></td><td></td><td></td></tr>`;
+  document.querySelectorAll('#mxh th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k;
+    if(sortKey===k)sortDir=-sortDir; else {sortKey=k;sortDir=k==='brand'?1:-1;}
+    matrix();
+  });
+}
+
+function bands(){
+  const cols=scope().map(m=>m.cc);
+  const rs=D.bands.map(b=>{
+    const s=cols.reduce((a,c)=>a+b[c].s*FX[c],0), u=cols.reduce((a,c)=>a+b[c].u,0);
+    return {lab:b.band,lo:b.lo,s,u};
+  });
+  const tot=rs.reduce((a,r)=>a+r.s,0), mx=Math.max(...rs.map(r=>r.s));
+  document.getElementById('bands').innerHTML=
+    `<div class="pb hd"><span>${L('Price','價格帶')}</span><span></span>
+      <span class="v">${L('Revenue','營收')}</span><span class="v">${L('Share','佔比')}</span></div>`+
+    rs.map(r=>`<div class="pb">
+      <span class="lab">$${r.lab}</span>
+      <span class="tr"><i class="${r.lo>=150?'hi':''}" style="width:${(r.s/mx*100).toFixed(1)}%"></i></span>
+      <span class="v">${money(r.s)}</span>
+      <span class="v">${(r.s/tot*100).toFixed(1)}%</span>
+    </div>`).join('')+
+    `<p class="sub" style="margin:14px 0 0">${L(
+      'Highlighted bands are $150 and above, where ASUS sells. They carry '+
+        ((rs[3].s+rs[4].s)/tot*100).toFixed(0)+'% of dock revenue on '+
+        (((rs[3].u+rs[4].u)/rs.reduce((a,r)=>a+r.u,0))*100).toFixed(0)+'% of the units.',
+      '標示的價格帶為 150 美元以上，即 ASUS 所在區間。該區間以 '+
+        (((rs[3].u+rs[4].u)/rs.reduce((a,r)=>a+r.u,0))*100).toFixed(0)+'% 的數量，貢獻了 '+
+        ((rs[3].s+rs[4].s)/tot*100).toFixed(0)+'% 的 dock 營收。',1)}</p>`;
+}
+
+function comp(){
+  const cc=focus||'US', list=D.comp[cc];
+  document.getElementById('comp').innerHTML=
+    `<p class="sub" style="margin:-6px 0 12px">${L('Showing '+M(cc).name,'目前顯示：'+M(cc).zh)}</p>`+
+    list.map(c=>`<div class="cl">
+      <span class="nm">${esc(c.b)}</span>
+      <span class="v">${money(c.s*FX[cc])}</span>
+      <span class="p">${(c.sh*100).toFixed(1)}%</span>
+    </div>`).join('');
+}
+
+function asus(){
+  const rs=MK.map(m=>({m,usd:m.asus*m.fx,sh:m.asus/m.dock,
+    yoy:m.asusLY?m.asus/m.asusLY-1:null,asp:m.asusU?m.asus/m.asusU:null}))
+    .sort((a,b)=>b.sh-a.sh);
+  document.getElementById('atab').innerHTML=
+    `<tr><th>${L('Market','市場')}</th><th>${L('Share of docks','Dock 市佔')}</th>
+     <th>${L('Rank','排名')}</th><th>${L('Revenue','營收')}</th>
+     <th>${L('Avg price','平均售價')}</th><th>${L('Year on year','年增率')}</th></tr>`+
+    rs.map((r,i)=>`<tr class="${i===0?'best':''}">
+      <td>${r.m.cc} <span class="en">${esc(r.m.name)}</span><span class="zh">${r.m.zh}</span></td>
+      <td>${(r.sh*100).toFixed(3)}%</td>
+      <td>#${r.m.asusRank} / ${r.m.brands}</td>
+      <td>${money(r.usd)}</td>
+      <td>${r.asp?'$'+Math.round(r.asp*r.m.fx):'—'}</td>
+      <td class="${r.yoy!=null&&r.yoy<-0.5?'g':''}">${r.yoy==null?'—':sgn(r.yoy)}</td></tr>`).join('');
+
+  document.getElementById('dead').innerHTML=D.dead.slice(0,9).map(x=>`<div>
+      <span>${x.mk}</span><span class="t" title="${esc(x.title)}">${esc(x.title)}</span>
+      <span class="y">${money(x.ly*FX[x.mk])}</span>
+      <span class="z">${x.s?money(x.s*FX[x.mk]):'0'}</span></div>`).join('');
+
+  const rl=[...D.roll].sort((a,b)=>b.wks-a.wks);
+  document.getElementById('roll').innerHTML=rl.map(r=>{
+    const left=r.first?((r.first-1)/35*100):0, w=r.wks?Math.max(r.wks/35*100,2):100;
+    return `<div class="${r.wks?'':'none'}">
+      <span>${r.cc}</span>
+      <span class="tr"><i style="left:${left.toFixed(1)}%;width:${w.toFixed(1)}%"></i></span>
+      <span class="n">${r.wks?'w'+r.first:'—'}</span>
+      <span class="s">${r.u?r.u+(document.body.className==='lang-en'?' u':' 台'):'—'}</span></div>`;
+  }).join('');
+}
+
+function render(){ band(); strip(); matrix(); bands(); comp(); asus();
+  document.getElementById('reset').hidden=!focus; }
+
+function setLang(mode){
+  document.body.className='lang-'+mode;
+  document.documentElement.lang=mode==='en'?'en':'zh-Hant';
+  const ph=mode==='en'?'Filter brands':mode==='zh'?'篩選品牌':'Filter brands 篩選品牌';
+  const qi=document.getElementById('q'); qi.placeholder=ph; qi.setAttribute('aria-label',ph);
+  for(const [id,m] of [['lb','both'],['le','en'],['lz','zh']])
+    document.getElementById(id).setAttribute('aria-pressed',m===mode);
+  asus();
+}
+document.getElementById('lb').onclick=()=>setLang('both');
+document.getElementById('le').onclick=()=>setLang('en');
+document.getElementById('lz').onclick=()=>setLang('zh');
+document.getElementById('q').oninput=e=>{query=e.target.value;matrix();};
+document.getElementById('reset').onclick=()=>{focus=null;sortKey='rev';sortDir=-1;render();};
+render();
+</script>
+</body>
+</html>
